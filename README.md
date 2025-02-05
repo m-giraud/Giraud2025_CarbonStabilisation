@@ -1,6 +1,6 @@
 # CPlantBox
 ## Coupled models
-Coupling of the [CPlantBox model](https://github.com/Plant-Root-Soil-Interactions-Modelling/CPlantBox) and its [dumux-rosi module](https://github.com/Plant-Root-Soil-Interactions-Modelling/dumux-rosi) (based on [DuMux]([http://cplantbox.com](https://dumux.org/)))
+Coupling of the [CPlantBox model](https://github.com/Plant-Root-Soil-Interactions-Modelling/CPlantBox) and its [dumux-rosi module](https://github.com/Plant-Root-Soil-Interactions-Modelling/dumux-rosi) (based on [DuMux](https://dumux.org/))
 
 
 ## Setup the files
