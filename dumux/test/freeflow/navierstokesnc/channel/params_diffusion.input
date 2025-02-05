@@ -1,0 +1,23 @@
+[TimeLoop]
+DtInitial = 1e6 # [s]
+TEnd = 1e9 # [s]
+
+[Grid]
+UpperRight = 5 1
+Cells = 50 10
+
+[Problem]
+Name = test_purediffusion
+InletVelocity = 0
+EnableGravity = false
+EnableInertiaTerms = false
+
+[ Newton ]
+MaxSteps = 10
+MaxRelativeShift = 1e-12
+
+[Vtk]
+WriteFaceData = false
+
+[SpatialParams]
+Temperature = 283.15

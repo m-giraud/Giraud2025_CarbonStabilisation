@@ -1,0 +1,3 @@
+[build-system]
+requires = ['dune-grid@git+https://gitlab.dune-project.org/core/dune-grid.git', 'setuptools', 'wheel', 'scikit-build', 'cmake', 'ninja', 'requests']
+build-backend = 'setuptools.build_meta'

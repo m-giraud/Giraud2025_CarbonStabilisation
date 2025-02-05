@@ -1,0 +1,27 @@
+[TimeLoop]
+DtInitial = 1e-2 # [s]
+# MaxTimeStepSize = 1e1
+TEnd = 5e2 # [s]
+
+[Grid]
+UpperRight = 1 1
+Cells = 40 40
+
+[Problem]
+Name = test_densitydrivenflow
+EnableGravity = true
+EnableInertiaTerms = false
+UseWholeLength = false
+
+[Assembly]
+NumericDifference.BaseEpsilon = 1e-8
+
+[Newton]
+MaxSteps = 10
+MaxRelativeShift = 1e-8
+
+[Vtk]
+WriteFaceData = false
+
+[SpatialParams]
+Temperature = 283.15

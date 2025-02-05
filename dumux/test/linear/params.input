@@ -1,0 +1,15 @@
+ProblemSize = 2
+
+[LinearSolver]
+Verbosity = 1
+
+[AMGCG.LinearSolver]
+Type = cgsolver
+Preconditioner.Type = amg
+
+[SSORCG.LinearSolver]
+Type = cgsolver
+Preconditioner.Type = ssor
+
+[AMGBiCGSTAB.LinearSolver]
+Verbosity = 1

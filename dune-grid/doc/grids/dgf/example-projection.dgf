@@ -1,0 +1,23 @@
+DGF
+% SPDX-FileCopyrightInfo: Copyright (C) DUNE Project contributors, see file LICENSE.md in module root
+% SPDX-License-Identifier: LicenseRef-GPL-2.0-only-with-DUNE-exception
+
+VERTEX
+-1 -1
+ 1 -1
+-1  1
+ 1  1
+#
+
+CUBE
+0 1 2 3
+#
+
+PROJECTION
+function p(x) = sqrt(2) * x / |x|
+function id(x) = x
+segment 0 1 id
+default p
+#
+
+# example-projection.dgf

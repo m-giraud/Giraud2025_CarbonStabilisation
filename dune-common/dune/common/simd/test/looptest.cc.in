@@ -1,0 +1,45 @@
+// SPDX-FileCopyrightInfo: Copyright (C) DUNE Project contributors, see file LICENSE.md in module root
+// SPDX-License-Identifier: LicenseRef-GPL-2.0-only-with-DUNE-exception
+// @GENERATED_SOURCE@
+
+#if HAVE_CONFIG_H
+#include "config.h"
+#endif
+
+#include <cstdlib>
+#include <type_traits>
+
+#include <dune/common/simd/loop.hh>
+#include <dune/common/simd/test.hh>
+#include <dune/common/simd/test/looptest.hh>
+#include <dune/common/typetraits.hh>
+
+template<class> struct RebindAccept : std::false_type {};
+#cmake @template@
+template<std::size_t A>
+struct RebindAccept<Dune::LoopSIMD<@SCALAR@, 5, A> > : std::true_type {};
+template<std::size_t A1, std::size_t A2>
+struct RebindAccept<Dune::LoopSIMD<Dune::LoopSIMD<@SCALAR@, 2, A1>, 5, A2> > : std::true_type {};
+#cmake @endtemplate@
+
+using Rebinds = Dune::Simd::RebindList<
+#cmake @template@
+  @SCALAR@,
+#cmake @endtemplate@
+  Dune::Simd::EndMark>;
+
+int main()
+{
+  Dune::Simd::UnitTest test;
+
+#cmake @template@
+  test.check<Dune::LoopSIMD<@SCALAR@, 5>,
+             Rebinds, Dune::AlwaysFalse, RebindAccept>();
+  test.check<Dune::LoopSIMD<@SCALAR@, 5, 64>,
+             Rebinds, Dune::AlwaysFalse, RebindAccept>();
+  test.check<Dune::LoopSIMD<Dune::LoopSIMD<@SCALAR@, 2>, 5>,
+             Rebinds, Dune::AlwaysFalse, RebindAccept>();
+#cmake @endtemplate@
+
+  return test.good() ? EXIT_SUCCESS : EXIT_FAILURE;
+}

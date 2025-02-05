@@ -1,0 +1,12 @@
+// SPDX-FileCopyrightInfo: Copyright (C) DUNE Project contributors, see file LICENSE.md in module root
+// SPDX-License-Identifier: LicenseRef-GPL-2.0-only-with-DUNE-exception
+
+/* This file determines the order how things appear in the doxygen
+   documentation within the dune-common module. It works like this:
+
+   @defgroup commands appear only in this file here which is
+   parsed before the other files (because it is mentioned first
+   in the Doxyfile).
+
+   Only @addtogroup is used in the code documentation.
+*/

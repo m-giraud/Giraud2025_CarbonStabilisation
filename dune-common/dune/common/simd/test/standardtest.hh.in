@@ -1,0 +1,22 @@
+// SPDX-FileCopyrightInfo: Copyright (C) DUNE Project contributors, see file LICENSE.md in module root
+// SPDX-License-Identifier: LicenseRef-GPL-2.0-only-with-DUNE-exception
+// @GENERATED_SOURCE@
+
+#ifndef DUNE_COMMON_SIMD_TEST_STANDARDTEST_HH
+#define DUNE_COMMON_SIMD_TEST_STANDARDTEST_HH
+
+#include <complex> // for substituted types
+
+#include <dune/common/simd/test.hh>
+
+namespace Dune {
+  namespace Simd {
+
+#cmake @template@
+    extern template void UnitTest::checkType<@SCALAR@>();
+#cmake @endtemplate@
+
+  } // namespace Simd
+} // namespace Dune
+
+#endif // DUNE_COMMON_SIMD_TEST_STANDARDTEST_HH

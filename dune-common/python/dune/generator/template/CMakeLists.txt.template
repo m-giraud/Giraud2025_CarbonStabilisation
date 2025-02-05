@@ -1,0 +1,77 @@
+# SPDX-FileCopyrightInfo: Copyright (C) DUNE Project contributors, see file LICENSE.md in module root
+# SPDX-License-Identifier: LicenseRef-GPL-2.0-only-with-DUNE-exception
+
+cmake_minimum_required(VERSION 3.13)
+
+# acquire lock to avoid cmake raise conditions
+
+# This is the CMakeLists.txt of the dune-py module. As new targets are
+# created when ever new bindings are required, a simple make call
+# might trigger a cmake reconfiguration. If different python scripts
+# run in parallel, we might have different parallel make calls and as
+# a consequence also parallel cmake calls.  Parallel cmake calls are
+# not allowed and as a consequence the complete build may fail. We
+# take care of such parallel cmake calls by additional locking in the
+# dune-py CMakeLists.txt
+set(lock "${CMAKE_BINARY_DIR}/cmake.lock")
+message("---- LOCK")
+file(LOCK ${lock})
+message("---- ACQUIRED")
+
+set(ALLOW_CXXFLAGS_OVERWRITE ON) 
+set(ALLOW_CXXFLAGS_OVERWRITE_FORCE ON)  
+set(DUNE_ENABLE_PYTHONBINDINGS ON)
+set(CMAKE_PREFIX_PATH {{ install_prefix }})
+
+{% for mod, dir in builddirs.items() -%}
+{% if dir != "" %}
+set({{ mod }}_DIR {{ dir }})
+{% endif %}
+{%- endfor %}
+
+{% for flag, value in cmake_flags.items() -%}
+{% if flag != "" %}
+set({{ flag }} "{{ value }}")
+{% endif %}
+{%- endfor %}
+
+project(dune-py C CXX)
+
+if(NOT (dune-common_DIR OR dune-common_ROOT OR "${CMAKE_PREFIX_PATH}" MATCHES ".*dune-common.*"))
+  string(REPLACE ${CMAKE_PROJECT_NAME} dune-common dune-common_DIR ${PROJECT_BINARY_DIR})
+endif()
+
+find_package(dune-common REQUIRED)
+list(APPEND CMAKE_MODULE_PATH ${dune-common_MODULE_PATH})
+
+# include(DunePythonCompiler)
+
+include(DuneMacros)
+dune_project()
+dune_enable_all_packages()
+
+add_subdirectory(python/dune/generated)
+# dune_add_pybind11_module(NAME ${DUNEPY_FILE})
+# dune_target_enable_all_packages(${DUNEPY_FILE})
+
+# find bash
+include(FindUnixCommands)
+# find make program (might differ from CMAKE_MAKE_PROGRAM when ninja is used
+find_program(MAKE make)  
+# CMAKE_MAKE_PROGRAM points to either make or ninja
+set( UNIXCMD_SCRIPT_FILE "[
+{ 
+ \"bash\" : \"${BASH}\", 
+ \"make\" : \"${MAKE}\",
+ \"generator\" : \"${CMAKE_MAKE_PROGRAM}\"
+}
+]")
+
+file(WRITE "${CMAKE_BINARY_DIR}/unix_commands.json" ${UNIXCMD_SCRIPT_FILE})
+
+finalize_dune_project(GENERATE_CONFIG_H_CMAKE)
+
+# we are done, so release lock
+message("---- RELEASE")
+file(LOCK ${lock} RELEASE)
+message("---- DONE")

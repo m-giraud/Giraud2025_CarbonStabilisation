@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightInfo: Copyright © DuMux Project contributors, see AUTHORS.md in root folder
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+[flake8]
+ignore = 
+    # Ignore whitespace before colon which gives false positive for list slice (black does it correct)
+    E203
+max-line-length = 100
+per-file-ignores =
+    # imported but unused and unable to detect undefined names
+    __init__.py: F401, F403

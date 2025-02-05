@@ -1,0 +1,306 @@
+// SPDX-FileCopyrightText: Copyright © DUNE Project contributors, see file LICENSE.md in module root
+// SPDX-License-Identifier: LGPL-2.1-or-later
+/****************************************************************************/
+/*                                                                          */
+/* File:      sll.ct                                                        */
+/*                                                                          */
+/* Purpose:   template routines for linked lists with freelist              */
+/*                                                                          */
+/* Author:    Klaus Birken                                                  */
+/*            Institut fuer Computeranwendungen III                         */
+/*            Universitaet Stuttgart                                        */
+/*            Pfaffenwaldring 27                                            */
+/*            70569 Stuttgart                                               */
+/*            internet: birken@ica3.uni-stuttgart.de                        */
+/*                                                                          */
+/* History:   960826 kb  created                                            */
+/*            970303 kb  added memory management in segms                   */
+/*                                                                          */
+/* Remarks:                                                                 */
+/*                                                                          */
+/****************************************************************************/
+
+
+
+/****************************************************************************/
+/*                                                                          */
+/* definition of exported global variables                                  */
+/*                                                                          */
+/****************************************************************************/
+
+/* segment of items */
+struct Segm(T)
+{
+	Segm(T) *next;
+	int              nItems;
+
+	T                item[SEGM_SIZE];
+};
+
+/****************************************************************************/
+/*                                                                          */
+/* routines                                                                 */
+/*                                                                          */
+/****************************************************************************/
+
+
+static Segm(T) *NewSegm(T) (DDD::DDDContext& context)
+{
+	auto& ctx = context.xferContext();
+	Segm(T) *segm;
+
+	segm = (Segm(T) *) OO_Allocate (sizeof(Segm(T)));
+	if (segm==NULL)
+	{
+		DDD_PrintError('F', 6060, STR_NOMEM " during XferEnd()");
+		return(NULL);
+	}
+
+	segm->next   = reinterpret_cast<Segm(T)*>(ctx.segms(T));
+	ctx.segms(T) = reinterpret_cast<DDD::Xfer::Segm(T)*>(segm);
+	segm->nItems = 0;
+	
+	return(segm);
+}
+
+
+static void FreeSegms(T) (DDD::DDDContext& context)
+{
+	auto& ctx = context.xferContext();
+	Segm(T) *segm = reinterpret_cast<Segm(T)*>(ctx.segms(T));
+	Segm(T) *next = NULL;
+
+	while (segm!=NULL)
+	{
+		next = segm->next;
+		OO_Free (segm /*,sizeof(Segm(T))*/ );
+
+		segm = next;
+	}
+
+	ctx.segms(T) = nullptr;
+}
+
+
+
+T *New(T) (DDD::DDDContext& context)
+{
+	auto& ctx = context.xferContext();
+	Segm(T) *segm = reinterpret_cast<Segm(T)*>(ctx.segms(T));
+	T        *item;
+
+	if (segm==NULL || segm->nItems==SEGM_SIZE)
+	{
+		segm = NewSegm(T) (context);
+		if (segm==NULL)
+			return(NULL);
+	}
+
+	item = &(segm->item[segm->nItems++]);
+
+
+	/* insert item into linked list and count it */
+	item->sll_next = reinterpret_cast<T*>(ctx.list(T));
+	ctx.list(T) = reinterpret_cast<DDD::Xfer::T*>(item);
+	ctx.n(T)++;
+
+	#ifdef SLL_WithOrigOrder
+		/* insert unique counter */
+		item->sll_n = ctx.n(T);
+	#endif
+
+	return(item);
+}
+
+
+
+
+/*
+	create pointer array from linked list and sort it
+	according to given comparison function compar().
+*/
+
+T **SortedArray(T) (DDD::DDDContext& context, int (*compar) (const void *, const void *))
+{
+	auto& ctx = context.xferContext();
+	T **array, *item;
+	int  i;
+
+	if (ctx.n(T)>0)
+	{
+		/* alloc array */
+		array = (T **) OO_Allocate(sizeof(T *) * ctx.n(T));
+		if (array==NULL)
+		{
+			DDD_PrintError('F', 6061, STR_NOMEM " during XferEnd()");
+			return(NULL);
+		}
+
+		/* fill array with pointer */
+		for(item=reinterpret_cast<T*>(ctx.list(T)), i=0; i<ctx.n(T); item=item->sll_next, i++)
+		{
+			array[i] = item;
+		}
+
+		/* sort by using compar function */
+		if (ctx.n(T)>1)
+			qsort(array, ctx.n(T), sizeof(T *), compar);
+	}
+	else
+	{
+		array = NULL;
+	}
+
+	return(array);
+}
+
+
+
+/****************************************************************************/
+
+#ifdef SLL_WithOrigOrder
+
+/*
+	sort array of items into order of their New(T) command
+	execution. the counter-component T.n is used for doing
+	this.
+*/
+
+static int sort_OrigOrder(T) (const void *e1, const void *e2)
+{
+	T *item1 = *((T **)e1);
+	T *item2 = *((T **)e2);
+
+	if (item1->sll_n < item2->sll_n) return(-1);
+	if (item1->sll_n > item2->sll_n) return(1);
+	return(0);
+}
+
+
+void OrigOrder(T) (DDD::DDDContext& context, T **array, int n)
+{
+	qsort(array, n, sizeof(T *), sort_OrigOrder(T));
+}
+
+#endif
+
+
+
+/****************************************************************************/
+
+
+/*
+	unify array of items. the array is compressed, the
+	resulting number of valid items is returned.
+	compar() is a comparison function which returns
+	whether two items are equal or not.
+
+	compar(a,b) should return 
+		FALSE  if a should be skipped and eventually b could be chosen
+		TRUE   if a must be taken.
+
+	the array of items must be sorted in order to
+	allow compar() to decide correctly.
+*/
+
+int Unify(T) (const DDD::DDDContext& context, T **array, int (*compar) (const DDD::DDDContext&, T **, T **))
+{
+	const auto& ctx = context.xferContext();
+	int  i, cntValid;
+
+	for(i=0, cntValid=0; i<ctx.n(T)-1; i++)
+	{
+		/* test if unique */
+		if (compar(context, &array[i],&array[i+1]))
+		{
+			/* choose item */
+			array[cntValid] = array[i];
+			cntValid++;
+		}
+		/* else: skip item */
+	}
+
+	/* always choose last item */
+	if (ctx.n(T)>0)
+	{
+		array[cntValid] = array[ctx.n(T)-1];
+		cntValid++;
+	}
+
+	return(cntValid);
+}
+
+
+
+/****************************************************************************/
+
+
+/*
+	init linked list
+*/
+void Init(T) (DDD::DDDContext& context)
+{
+	auto& ctx = context.xferContext();
+
+	ctx.list(T) = nullptr;
+	ctx.n(T) = 0;
+
+	ctx.segms(T) = nullptr;
+
+	/*
+	free(T) = NULL;
+	*/
+}
+
+
+
+/*
+	free all items
+*/
+void FreeAll(T) (DDD::DDDContext& context)
+{
+	auto& ctx = context.xferContext();
+
+	ctx.list(T) = nullptr;
+	ctx.n(T) = 0;
+
+	FreeSegms(T) (context);
+}
+
+
+/*
+	get quantitative resource usage
+*/
+void GetSizes(T) (const DDD::DDDContext& context, int *nSegms, int *nItems, size_t *alloc_mem, size_t *used_mem)
+{
+	const auto& ctx = context.xferContext();
+	size_t   allocated=0, used=0;
+	int      ns=0, ni=0;
+	Segm(T)  *segm;
+
+	for (segm=reinterpret_cast<Segm(T)*>(ctx.segms(T)); segm!=NULL; segm=segm->next)
+	{
+		/* count number of segments and number of items */
+		ns++;
+		ni+=segm->nItems;
+
+		/* compute memory usage */
+		allocated += sizeof(Segm(T));
+		used += (sizeof(Segm(T)) - (sizeof(T)*(SEGM_SIZE-segm->nItems)));
+	}
+
+	*nSegms    = ns;
+	*nItems    = ni;
+	*alloc_mem = allocated;
+	*used_mem  = used;
+}
+
+
+/****************************************************************************/
+
+#ifdef SLL_WithOrigOrder
+#undef SLL_WithOrigOrder
+#endif
+
+/****************************************************************************/
+

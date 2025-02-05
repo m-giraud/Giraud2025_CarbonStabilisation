@@ -1,0 +1,23 @@
+[TimeLoop]
+DtInitial = 1 # [s]
+TEnd = 1e5 # [s]
+MaxTimeStepSize = 1e10
+
+[Grid]
+LowerLeft = 0 0
+UpperRight = 5 1
+Cells = 200 1
+
+
+[Problem]
+Name = test_1p2cni_conduction # name passed to the output routines
+OutputInterval = 5 # every n-th timestep an output file is written
+EnableGravity = false
+
+[Vtk]
+AddVelocity = true
+
+[Component]
+SolidDensity = 2700
+SolidThermalConductivity = 2.8
+SolidHeatCapacity = 790

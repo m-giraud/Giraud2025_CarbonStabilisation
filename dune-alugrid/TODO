@@ -1,0 +1,8 @@
+Features of old 2d grid, that do not yet work:
+
+FaceTransformations
+Periodic Grids
+
+Improvements to the parallel 2d grid:
+
+Test parallel reading of mesh files

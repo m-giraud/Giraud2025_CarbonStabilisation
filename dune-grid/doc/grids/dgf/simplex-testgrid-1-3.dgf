@@ -1,0 +1,23 @@
+DGF
+% SPDX-FileCopyrightInfo: Copyright (C) DUNE Project contributors, see file LICENSE.md in module root
+% SPDX-License-Identifier: LicenseRef-GPL-2.0-only-with-DUNE-exception
+
+Vertex
+0.0   0.0   0.0
+0.25  0.25  0.25
+0.5   0.5   0.5
+0.75  0.75  0.75
+1.0   1.0   1.0
+#
+
+Simplex
+0 1
+1 2
+2 3
+3 4
+#
+
+BoundaryDomain
+default 1
+#
+

@@ -1,0 +1,42 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (C) DUNE Project contributors, see file LICENSE.md in module root
+ * SPDX-License-Identifier: LicenseRef-GPL-2.0-only-with-DUNE-exception
+ */
+/*
+ * Run `maxima --batch gausslobatto.mac'.
+ */
+
+/* adjust search path */
+file_search_maxima: append(["$$$.{mac,max}"],file_search_maxima);
+
+load(orthopoly)$
+load(stringproc)$
+load(writequad)$
+
+orthopoly_returns_intervals : false;
+
+fpprec: 120$
+fpprintprec: 100$
+maxp: 31$
+/* float2bf: false$ */
+
+/*
+  see https://mathworld.wolfram.com/LobattoQuadrature.html,
+
+  inner points are given as the roots of legendre_{n-1}'(x)
+  to generate outer points at -1 and 1, we multiply by (x^2 - 1)
+*/
+point(n) := (x^2-1)*diff(legendre_p(n-1,x),x)$
+weight(n,xx) := at(ratsimp(2/((n*(n-1))*legendre_p(n-1,x)^2)), x=xx)$
+
+write_quad("gausslobattoquadrature.hh", "GaussLobatto", "gausslobatto.mac",
+		       lambda([i],point(i)),
+           lambda([i,p],weight(i,p)),
+		       maxp, 2)$
+
+/*
+ * Local variables:
+ * mode: maxima
+ * compile-command: "maxima --batch gausslobatto.mac"
+ * End:
+ */

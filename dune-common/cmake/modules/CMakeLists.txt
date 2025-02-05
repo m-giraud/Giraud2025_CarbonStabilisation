@@ -1,0 +1,64 @@
+# SPDX-FileCopyrightInfo: Copyright (C) DUNE Project contributors, see file LICENSE.md in module root
+# SPDX-License-Identifier: LicenseRef-GPL-2.0-only-with-DUNE-exception
+
+add_subdirectory(FindPkgConfig)
+add_subdirectory(FindPython3)
+
+install(FILES
+  AddBLASLapackFlags.cmake
+  AddGMPFlags.cmake
+  AddMETISFlags.cmake
+  AddMPIFlags.cmake
+  AddParMETISFlags.cmake
+  AddPTScotchFlags.cmake
+  AddQuadMathFlags.cmake
+  AddTBBFlags.cmake
+  AddThreadsFlags.cmake
+  AddSuiteSparseFlags.cmake
+  AddVcFlags.cmake
+  CheckCXXFeatures.cmake
+  CMakeBuiltinFunctionsDocumentation.cmake
+  DuneAddLibrary.cmake
+  DuneAddPybind11Module.cmake
+  DuneCMakeCompat.cmake
+  DuneCommonMacros.cmake
+  DuneDoc.cmake
+  DuneDoxygen.cmake
+  DuneEnableAllPackages.cmake
+  DuneExecuteProcess.cmake
+  DuneInstance.cmake
+  DuneMacros.cmake
+  DuneModuleDependencies.cmake
+  DuneModuleInformation.cmake
+  DunePathHelper.cmake
+  DunePkgConfig.cmake
+  DuneProject.cmake
+  DunePythonCommonMacros.cmake
+  DunePythonDeprecations.cmake
+  DunePythonFindPackage.cmake
+  DunePythonInstallPackage.cmake
+  DunePythonTestCommand.cmake
+  DunePythonVirtualenv.cmake
+  DuneReplaceProperties.cmake
+  DuneSphinxDoc.cmake
+  DuneSphinxCMakeDoc.cmake
+  DuneStreams.cmake
+  DuneSymlinkOrCopy.cmake
+  DuneTestMacros.cmake
+  DuneUtilities.cmake
+  FindGMP.cmake
+  FindInkscape.cmake
+  FindLatexMk.cmake
+  FindMETIS.cmake
+  FindParMETIS.cmake
+  FindPTScotch.cmake
+  FindQuadMath.cmake
+  FindSphinx.cmake
+  FindSuiteSparse.cmake
+  FindTBB.cmake
+  Headercheck.cmake
+  latexmkrc.cmake
+  OverloadCompilerFlags.cmake
+  UseInkscape.cmake
+  UseLatexMk.cmake
+  DESTINATION ${DUNE_INSTALL_MODULEDIR})

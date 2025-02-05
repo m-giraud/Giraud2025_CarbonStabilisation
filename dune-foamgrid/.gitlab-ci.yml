@@ -1,0 +1,23 @@
+---
+include:
+  - project: 'core/ci-config'
+    ref: master
+    file: 'config/common/releases/2.9.yml'
+  - project: 'core/ci-config'
+    ref: master
+    file: 'jobs/common/releases/2.9.yml'
+
+before_script:
+  - . /duneci/bin/duneci-init-job
+  - duneci-install-module https://gitlab.dune-project.org/core/dune-common.git
+  - duneci-install-module https://gitlab.dune-project.org/core/dune-geometry.git
+  - duneci-install-module https://gitlab.dune-project.org/core/dune-grid.git
+
+dune:2.8 ubuntu:20.04 clang-10-20:
+  image: registry.dune-project.org/docker/ci/ubuntu:20.04
+  script: duneci-standard-test
+  variables:
+    DUNECI_TOOLCHAIN: clang-10-20
+    DUNECI_CMAKE_FLAGS: "-DDUNE_PYTHON_VIRTUALENV_SETUP=TRUE -DDUNE_ENABLE_PYTHONBINDINGS=TRUE -DBUILD_SHARED_LIBS=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_Alberta=TRUE"
+    DUNECI_BRANCH: releases/2.8
+  tags: [duneci]

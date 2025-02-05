@@ -1,0 +1,99 @@
+# SPDX-FileCopyrightInfo: Copyright © DuMux Project contributors, see AUTHORS.md in root folder
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+# This file contains local changes to the doxygen configuration
+# please us '+=' to add file/directories to the lists
+
+PROJECT_NAME          = "DuMux"
+PROJECT_BRIEF         = "Flow and transport in porous media"
+PROJECT_LOGO          = @top_srcdir@/doc/logo/dumux_logo_small.png
+PROJECT_NUMBER        = @DUNE_MOD_VERSION@
+
+INPUT                 += @top_srcdir@/README.md \
+                         @srcdir@/pages \
+                         @srcdir@/groups \
+                         @srcdir@/README.md \
+                         @top_srcdir@/python/README.md \
+                         @top_srcdir@/dumux \
+                         @srcdir@/extradoc/parameterlist.txt
+
+USE_MDFILE_AS_MAINPAGE = @top_srcdir@/README.md
+TOC_INCLUDE_HEADINGS   = 4
+
+# custom doxygen commands
+ALIASES                += mermaid{1}="@htmlonly <div class=\"mermaid\"> @endhtmlonly @htmlinclude \"\1.mmd\" @htmlonly </div> @endhtmlonly"
+ALIASES                += refdir{1}="@ref @top_srcdir@/\1"
+
+# Input filters run over content before it is parsed by Doxygen.
+# - Format markdown math for Doxygen. See the documentation in
+#   `markdown-math-filter.pl` for details.
+FILTER_PATTERNS        = *.md="python3 @srcdir@/markdown-filter.py"
+
+FILE_PATTERNS         = *.md,*.cc,*.hh
+
+EXCLUDE               += @top_srcdir@/dumux/io/format/fmt \
+                         @top_srcdir@/dumux/porenetwork/util/README.md
+
+EXAMPLE_PATH          += @srcdir@/extradoc \
+                         @top_srcdir@/test/python \
+                         @srcdir@/groups/details
+
+IMAGE_PATH             = @srcdir@/images
+
+EXTRA_PACKAGES        += amsmath,amssymb,units
+
+LAYOUT_FILE            = @srcdir@/DoxygenDumuxLayout.xml
+
+HTML_HEADER            = @srcdir@/header.html
+HTML_FOOTER            = @srcdir@/footer.html
+
+HTML_EXTRA_FILES       = @srcdir@/doxygen-awesome-darkmode-toggle.js \
+                         @srcdir@/doxygen-awesome-fragment-copy-button.js \
+                         @srcdir@/doxygen-awesome-paragraph-link.js \
+                         @srcdir@/doxygen-awesome-interactive-toc.js \
+                         @srcdir@/dumux-custom.js
+
+HTML_EXTRA_STYLESHEET  = @srcdir@/doxygen-awesome.css \
+                         @srcdir@/doxygen-awesome-sidebar-only.css \
+                         @srcdir@/doxygen-awesome-sidebar-only-darkmode-toggle.css \
+                         @srcdir@/dumux-custom.css
+
+HTML_FILE_EXTENSION    = .html
+
+USE_MATHJAX            = YES
+MATHJAX_VERSION        = MathJax_3
+
+EXCLUDE_PATTERNS       = *_.hh
+
+GENERATE_TODOLIST      = NO
+
+# enable client side searching
+SEARCHENGINE           = YES
+SERVER_BASED_SEARCH    = NO
+
+# the bibliography file used for the doxygen documentation
+CITE_BIB_FILES         = @top_srcdir@/doc/doxygen/dumux.bib
+
+# enable macro expansion only for specified macros
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+
+DOT_GRAPH_MAX_NODES    = 100
+
+DOT_IMAGE_FORMAT       = svg
+
+SHORT_NAMES           = NO
+
+# Settings required for doxygen-awesome theme
+GENERATE_TREEVIEW      = YES
+TREEVIEW_WIDTH         = 320
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = NO
+HTML_COLORSTYLE        = LIGHT # required with Doxygen >= 1.9.5
+
+# Do no repeat in the description
+REPEAT_BRIEF = NO
+# Display the brief description
+BRIEF_MEMBER_DESC = YES
+# Omit the detailed section when there is none specified
+ALWAYS_DETAILED_SEC = NO

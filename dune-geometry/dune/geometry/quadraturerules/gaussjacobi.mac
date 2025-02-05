@@ -1,0 +1,55 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (C) DUNE Project contributors, see file LICENSE.md in module root
+ * SPDX-License-Identifier: LicenseRef-GPL-2.0-only-with-DUNE-exception
+ */
+/*
+ * Run `maxima --batch gaussjacobi.mac'.
+ */
+
+/* adjust search path */
+file_search_maxima: append(["$$$.{mac,max}"],file_search_maxima);
+
+load(orthopoly)$
+load(stringproc)$
+load(writequad)$
+
+fpprec: 100$
+maxp: 61$
+/* float2bf: false$ */
+
+/*
+  see https://mathworld.wolfram.com/Jacobi-GaussQuadrature.html
+
+  Gauss-Jacobi uses a weight function (1- x)^a (1 + x)^b,
+  thus the case a = 0, b = 0 is the Gauss-Legendre rule.
+*/
+jacobi(p,a,b) := jacobi_p(p,a,b,x)$
+
+jacobi_p_x(p,a,b,x) := 1/2*(p+a+b+1)*jacobi_p(p-1,a+1,b+1,x)$ /*  d/dx jacobi_p, (see http://mathworld.wolfram.com/JacobiPolynomial.html) */
+
+A(n,a,b) := gamma(2*n+a+b+1)/(2^n*n!*gamma(n+a+b+1))$
+
+gamma_n(n,a,b) := 1/(2^(2*n)*(n!)^2)*(2^(2*n+a+b+1)*n!)/(2*n+a+b+1)*(gamma(n+a+1)*gamma(n+b+1))/gamma(n+a+b+1)$
+
+weight(n,a,b,xx) := A(n,a,b)/A(n-1,a,b)*gamma_n(n-1,a,b)/(at(ratexpand(jacobi_p(n-1,a,b,x)*jacobi_p_x(n,a,b,x)), x=xx))$
+
+
+write_quad("jacobi1quadrature.hh", "Jacobi1", "jacobian.mac",
+		   lambda([i],jacobi(i,1,0)),
+           lambda([i,p],weight(i,1,0,p)),
+		   maxp, 0)$
+write_quad("jacobi2quadrature.hh", "Jacobi2", "jacobian.mac",
+		   lambda([i],jacobi(i,2,0)),
+           lambda([i,p],weight(i,2,0,p)),
+           maxp, 0)$
+write_quad("gaussquadrature.hh", "Gauss", "jacobian.mac",
+		   lambda([i],jacobi(i,0,0)),
+           lambda([i,p],weight(i,0,0,p)),
+           maxp, 0)$
+
+/*
+ * Local variables:
+ * mode: maxima
+ * compile-command: "maxima --batch gaussjacobi.mac"
+ * End:
+ */

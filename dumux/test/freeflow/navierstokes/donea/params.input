@@ -1,0 +1,36 @@
+[Grid]
+UpperRight = 1 1
+Cells = 40 40
+Overlap = 1
+# when refining grid make sure overlap stays 1 (only 1 currently works)
+KeepPhysicalOverlap = true
+Refinement = 0
+
+[Problem]
+Name = test_donea
+EnableGravity = false
+EnableInertiaTerms = false
+UseNeumann = true
+PrintErrors = true
+
+[Component]
+LiquidDensity = 1.0
+LiquidKinematicViscosity = 1.0
+
+[ Newton ]
+MaxSteps = 10
+MaxRelativeShift = 1e-8
+
+[LinearSolver]
+Type = bicgstabsolver
+ResidualReduction = 1e-15
+
+[LinearSolver.Preconditioner]
+Type = ilu
+AmgAccumulationMode = atOnce
+
+[Assembly]
+NumericDifference.BaseEpsilon = 1e-1
+
+[SpatialParams]
+Temperature = 298.0

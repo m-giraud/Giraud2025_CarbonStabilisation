@@ -1,0 +1,1 @@
+install(FILES DuneSpgridMacros.cmake DESTINATION ${DUNE_INSTALL_MODULEDIR})

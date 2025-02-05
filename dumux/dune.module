@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightInfo: Copyright © DuMux Project contributors, see AUTHORS.md in root folder
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+Module: dumux
+Version: 3.8
+Author: The DuMux Team
+Maintainer: dumux@listserv.uni-stuttgart.de
+Depends: dune-common (>=2.9) dune-grid (>=2.9) dune-localfunctions (>=2.9) dune-istl (>=2.9)
+Suggests: dune-alugrid (>=2.9) dune-foamgrid (>=2.9) dune-uggrid (>=2.9) dune-functions (>=2.9) opm-common opm-grid dune-subgrid (>=2.9) dune-spgrid (>=2.9) dune-mmesh (>=1.4)
+Description: DuMux is a module for simulation of multi-phase multi-component flow transport in porous media
+URL: https://dumux.org
+Python-Requires: numpy
+Whitespace-Hook: Yes

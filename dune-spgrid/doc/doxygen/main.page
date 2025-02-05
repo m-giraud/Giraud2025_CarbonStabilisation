@@ -1,0 +1,46 @@
+/**
+\mainpage
+
+\section introduction Introduction
+
+The <a href="http://www.dune-project.org">%DUNE</a> module <tt>dune-spgrid</tt>
+provides a structured, parallel grid (\ref Dune::SPGrid "SPGrid").
+Though the <tt>dune-grid</tt> module already contains two structured grids,
+<tt>SGrid</tt> and <tt>YaspGrid</tt>, both lack several important features
+(see \ref features for details).
+
+
+\section features Features
+
+The following table shows a comparison of selected features between
+<tt>SGrid</tt>, <tt>YaspGrid</tt>, and <tt>SPGrid</tt>:
+<table>
+<tr><th></th>
+    <th>SGrid</th><th>YaspGrid</th><th>SPGrid</th>
+</tr>
+<tr><th align=left>Provides entities for codimensions</th>
+    <td>all</td><td>0, dim</td><td>all</td>
+</tr>
+<tr><th align=left>Can communicate on codimensions</th>
+    <td>none</td><td>0, dim</td><td>all</td>
+</tr>
+<tr><th align=left>supports superentity iterators for codimensions</th>
+    <td>none</td><td>none</td><td>all</td>
+</tr>
+<tr><th align=left>Supported domains</th>
+    <td>\f$\prod [a_i,b_i]\f$</td>
+    <td>\f$\prod [0,b_i]\f$</td>
+    <td>\f$\prod [a_i,b_i]\f$</td>
+</tr>
+<tr><th align=left>Supports periodicity</th>
+    <td>no</td><td>no</td><td>yes</td>
+</tr>
+<tr><th align=left>Supports anisotropic refinement</td>
+    <td>no</td><td>no</td><td>yes</td>
+</tr>
+<tr><th align=left>Coordinate type is a template parameter</th>
+    <td>yes</td><td>no</td><td>yes</td>
+</tr>
+</table>
+
+*/

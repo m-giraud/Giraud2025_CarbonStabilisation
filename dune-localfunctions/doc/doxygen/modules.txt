@@ -1,0 +1,56 @@
+// SPDX-FileCopyrightText: Copyright (C) DUNE Project contributors, see file LICENSE.md in module root
+// SPDX-License-Identifier: LicenseRef-GPL-2.0-only-with-DUNE-exception
+
+/**
+ * \defgroup LocalFunctions LocalFunctions
+ */
+
+/**
+ * \defgroup BrezziDouglasFortinMarini Brezzi-Douglas-Fortin-Marini elements
+ * \ingroup LocalFunctions
+ */
+
+/**
+ * \defgroup BrezziDouglasMarini Brezzi-Douglas-Marini elements
+ * \ingroup LocalFunctions
+ */
+
+/**
+ * \defgroup DualMortar Dual Mortar basis elements
+ * \ingroup LocalFunctions
+ */
+
+/**
+ * \defgroup Lagrange Lagrange elements
+ * \ingroup LocalFunctions
+ */
+
+/**
+ * \defgroup Mimetic Mimetic elements
+ * \ingroup LocalFunctions
+ */
+
+/**
+ * \defgroup Monomial Monomial elements
+ * \ingroup LocalFunctions
+ */
+
+/**
+ * \defgroup Orthonormal Orthonormal elements
+ * \ingroup LocalFunctions
+ */
+
+/**
+ * \defgroup RannacherTurek Rannacher-Turek elements
+ * \ingroup LocalFunctions
+ */
+
+/**
+ * \defgroup RaviartThomas Raviart-Thomas elements
+ * \ingroup LocalFunctions
+ */
+
+/**
+ * \defgroup Whitney Whitney elements
+ * \ingroup LocalFunctions
+ */

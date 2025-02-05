@@ -1,0 +1,24 @@
+[TimeLoop]
+DtInitial = 1e5 # [s]
+TEnd = 70000 # [s]
+MaxTimeStepSize = 1e5
+
+[Grid]
+UpperRight = 1 1
+Cells = 30 30
+
+[Problem]
+Name = test_msfreeflow
+EnableGravity = false
+EnableInertiaTerms = false
+PlotOutput = true
+
+[Assembly]
+NumericDifference.BaseEpsilon = 1e-4
+
+[Vtk]
+WriteFaceData = false
+AddVelocity = false
+
+[SpatialParams]
+Temperature = 283.15

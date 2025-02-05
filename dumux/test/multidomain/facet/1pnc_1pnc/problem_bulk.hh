@@ -1,0 +1,166 @@
+// -*- mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+// vi: set et ts=4 sw=4 sts=4:
+//
+// SPDX-FileCopyrightInfo: Copyright © DuMux Project contributors, see AUTHORS.md in root folder
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+/*!
+ * \file
+ * \ingroup FacetTests
+ * \brief The problem for the bulk domain in the 1pnc facet coupling test.
+ */
+#ifndef DUMUX_TEST_TPFAFACETCOUPLING_ONEPNC_BULKPROBLEM_HH
+#define DUMUX_TEST_TPFAFACETCOUPLING_ONEPNC_BULKPROBLEM_HH
+
+#include <dumux/common/properties.hh>
+#include <dumux/common/parameters.hh>
+#include <dumux/common/boundarytypes.hh>
+#include <dumux/common/numeqvector.hh>
+
+#include <dumux/porousmediumflow/problem.hh>
+
+// defined in CMakeLists.txt
+#ifndef USEMIXEDBCS
+#define USEMIXEDBCS false
+#endif
+
+namespace Dumux {
+
+/*!
+ * \ingroup FacetTests
+ * \brief Test problem for the 1pnc model with
+ *        coupling across the bulk grid facets.
+ */
+template<class TypeTag>
+class OnePNCBulkProblem : public PorousMediumFlowProblem<TypeTag>
+{
+    using ParentType = PorousMediumFlowProblem<TypeTag>;
+
+    using GridVariables = GetPropType<TypeTag, Properties::GridVariables>;
+    using PrimaryVariables = typename GridVariables::PrimaryVariables;
+    using Scalar = typename GridVariables::Scalar;
+
+    using GridGeometry = typename GridVariables::GridGeometry;
+    using FVElementGeometry = typename GridGeometry::LocalView;
+    using SubControlVolume = typename GridGeometry::SubControlVolume;
+    using SubControlVolumeFace = typename GridGeometry::SubControlVolumeFace;
+    using GridView = typename GridGeometry::GridView;
+    using Element = typename GridView::template Codim<0>::Entity;
+    using GlobalPosition = typename Element::Geometry::GlobalCoordinate;
+
+    using BoundaryTypes = Dumux::BoundaryTypes<GetPropType<TypeTag, Properties::ModelTraits>::numEq()>;
+    using CouplingManager = GetPropType<TypeTag, Properties::CouplingManager>;
+    using NumEqVector = Dumux::NumEqVector<PrimaryVariables>;
+    using Indices = typename GetPropType<TypeTag, Properties::ModelTraits>::Indices;
+    using FluidSystem = GetPropType<TypeTag, Properties::FluidSystem>;
+
+    using ModelTraits = GetPropType<TypeTag, Properties::ModelTraits>;
+    static constexpr bool enableHeatConduction = ModelTraits::enableEnergyBalance();
+
+    enum
+    {
+        // indices of the primary variables
+        pressureIdx = Indices::pressureIdx,
+        H2OIdx = FluidSystem::compIdx(FluidSystem::MultiPhaseFluidSystem::H2OIdx),
+        N2Idx = FluidSystem::compIdx(FluidSystem::MultiPhaseFluidSystem::N2Idx),
+
+        // equation indices
+        contiH2OEqIdx = Indices::conti0EqIdx + H2OIdx
+    };
+
+public:
+    OnePNCBulkProblem(std::shared_ptr<const GridGeometry> gridGeometry,
+                      std::shared_ptr<typename ParentType::SpatialParams> spatialParams,
+                      std::shared_ptr<CouplingManager> couplingManager,
+                      const std::string& paramGroup = "")
+    : ParentType(gridGeometry, spatialParams, paramGroup)
+    , couplingManagerPtr_(couplingManager)
+    {
+        //initialize fluid system
+        FluidSystem::init();
+
+        // stating in the console whether mole or mass fractions are used
+        if (!getPropValue<TypeTag, Properties::UseMoles>())
+            DUNE_THROW(Dune::InvalidStateException, "Problem is implemented for molar formulation!");
+
+        problemName_  =  getParam<std::string>("Vtk.OutputName") + "_" +
+                         getParamFromGroup<std::string>(this->paramGroup(), "Problem.Name");
+    }
+
+    //! The problem name.
+    const std::string& name() const
+    { return problemName_; }
+
+    //! Specifies the type of boundary condition at a given position.
+    BoundaryTypes boundaryTypesAtPos(const GlobalPosition& globalPos) const
+    {
+        BoundaryTypes values;
+        values.setAllNeumann();
+#if !USEMIXEDBCS
+        if (globalPos[1] < 1e-6 || globalPos[1] > this->gridGeometry().bBoxMax()[1] - 1e-6)
+            values.setAllDirichlet();
+#else
+        if (globalPos[1] < 1e-6)
+            values.setAllDirichlet();
+        if (globalPos[1] > this->gridGeometry().bBoxMax()[1] - 1e-6)
+            values.setDirichlet(contiH2OEqIdx);
+#endif
+        return values;
+    }
+
+    //! Specifies the type of interior boundary condition at a given position.
+    BoundaryTypes interiorBoundaryTypes(const Element& element, const SubControlVolumeFace& scvf) const
+    {
+        BoundaryTypes values;
+        values.setAllNeumann();
+        return values;
+    }
+
+    //! Evaluates the source term at a given position.
+    NumEqVector sourceAtPos(const GlobalPosition& globalPos) const
+    { return NumEqVector(0.0); }
+
+    //! Evaluates the Dirichlet boundary condition for a given position.
+    PrimaryVariables dirichletAtPos(const GlobalPosition& globalPos) const
+    {
+        auto values = initialAtPos(globalPos);
+
+        if (globalPos[1] < 1e-6)
+        {
+            values[N2Idx] = 1e-3;
+            if constexpr (enableHeatConduction)
+            {
+                values[Indices::temperatureIdx] += 100; // DeltaT = 100 K
+            }
+        }
+
+        return values;
+    }
+
+    //! Evaluates the initial conditions.
+    PrimaryVariables initialAtPos(const GlobalPosition& globalPos) const
+    {
+        PrimaryVariables values;
+        values[pressureIdx] = 1.0e5;
+        values[N2Idx] = 0.0;
+
+        if constexpr (enableHeatConduction)
+        {
+            values[Indices::temperatureIdx] = this->spatialParams().temperatureAtPos(globalPos);
+        }
+
+        return values;
+    }
+
+    //! Returns reference to the coupling manager.
+    const CouplingManager& couplingManager() const
+    { return *couplingManagerPtr_; }
+
+private:
+    std::shared_ptr<CouplingManager> couplingManagerPtr_;
+    std::string problemName_;
+};
+
+} // end namespace Dumux
+
+#endif

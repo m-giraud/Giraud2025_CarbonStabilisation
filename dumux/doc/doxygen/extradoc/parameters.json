@@ -1,0 +1,2624 @@
+{
+    "-.A00": {
+        "explanation": [
+            "A coefficient for capillary-pressure-saturation-interfacial-area relations described by a polynomial of second order."
+        ]
+    },
+    "-.A01": {
+        "explanation": [
+            "A coefficient for capillary-pressure-saturation-interfacial-area relations described by a polynomial of second order."
+        ]
+    },
+    "-.A02": {
+        "explanation": [
+            "A coefficient for capillary-pressure-saturation-interfacial-area relations described by a polynomial of second order."
+        ]
+    },
+    "-.A1": {
+        "explanation": [
+            "A coefficient for capillary-pressure-saturation-interfacial-area relations described by a polynomial of second order."
+        ]
+    },
+    "-.A10": {
+        "explanation": [
+            "A coefficient for capillary-pressure-saturation-interfacial-area relations described by a polynomial of second order."
+        ]
+    },
+    "-.A11": {
+        "explanation": [
+            "A coefficient for capillary-pressure-saturation-interfacial-area relations described by a polynomial of second order."
+        ]
+    },
+    "-.A2": {
+        "explanation": [
+            "A coefficient for capillary-pressure-saturation-interfacial-area relations described by a polynomial of second order."
+        ]
+    },
+    "-.A20": {
+        "explanation": [
+            "A coefficient for capillary-pressure-saturation-interfacial-area relations described by a polynomial of second order."
+        ]
+    },
+    "-.A3": {
+        "explanation": [
+            "A coefficient for capillary-pressure-saturation-interfacial-area relations described by a polynomial of second order."
+        ]
+    },
+    "-.BrooksCoreyLambda": {
+        "explanation": [
+            "Parameter lambda in Brooks Corey."
+        ]
+    },
+    "-.BrooksCoreyPcEntry": {
+        "explanation": [
+            "Entry capillary pressure in Brooks Corey."
+        ]
+    },
+    "-.BrooksCoreyPcLowSweThreshold": {
+        "explanation": [
+            "For effective wetting phase saturations below this value, capillary pressure is given by a regularized capillary pressure-saturation curve."
+        ]
+    },
+    "-.HeatpipeLawGamma": {
+        "explanation": [
+            "Parameter gamma in heat pipe law."
+        ]
+    },
+    "-.HeatpipeLawP0": {
+        "explanation": [
+            "Parameter p0 in heat pipe law."
+        ]
+    },
+    "-.HighSwRegularizationMethod": {
+        "explanation": [
+            "A regularization method for the capillary pressure at high wetting saturations. Possible values are \"Linear\", \"Spline\" and \"PowerLaw\"."
+        ]
+    },
+    "-.HighSwSplineZeroSlope": {
+        "explanation": [
+            "Whether to use a zero slope of the capillary pressure at high wetting saturations."
+        ]
+    },
+    "-.KrnData": {
+        "type":[
+            "std::vector<Scalar>"
+        ],
+        "explanation": [
+            "Relative permeability for the non-wetting phase data for spline material law."
+        ]
+    },
+    "-.KrwData": {
+        "type":[
+            "std::vector<Scalar>"
+        ],
+        "explanation": [
+            "Relative permeability for the wetting phase data for spline material law."
+        ]
+    },
+    "-.LinearPcEntry": {
+        "explanation": [
+            "Entry capillary pressure for the linear capillary pressure and relative permeability <-> saturation relations."
+        ]
+    },
+    "-.LinearPcMax": {
+        "explanation": [
+            "Maximum capillary pressure for the linear capillary pressure and relative permeability <-> saturation relations."
+        ]
+    },
+    "-.ParameterFile": {
+        "defaultValue": [
+            "executablename.input"
+        ],
+        "explanation": [
+            "Command line argument: overwrite parameter file if one was specified on the command line"
+        ],
+        "mode": "manual",
+        "type": [
+            "std::string"
+        ]
+    },
+    "-.ParkerVanGenuchtenAlpha": {
+        "explanation": [
+            "Shape parameter \\f$\\mathrm{\\alpha}\\f$ \\f$\\mathrm{[1/Pa]}\\f$ in Parker/vanGenuchten laws."
+        ]
+    },
+    "-.ParkerVanGenuchtenBetaGn": {
+        "explanation": [
+            "Scaling parameter \\f$\\mathrm{betaGn}\\f$ \\f$\\mathrm{[-]}\\f$ in Parker/vanGenuchten laws."
+        ]
+    },
+    "-.ParkerVanGenuchtenBetaGw": {
+        "explanation": [
+            "Scaling parameter \\f$\\mathrm{betaGw}\\f$ \\f$\\mathrm{[-]}\\f$ in Parker/vanGenuchten laws."
+        ]
+    },
+    "-.ParkerVanGenuchtenBetaNw": {
+        "explanation": [
+            "Scaling parameter \\f$\\mathrm{betaNw}\\f$ \\f$\\mathrm{[-]}\\f$ in Parker/vanGenuchten laws."
+        ]
+    },
+    "-.ParkerVanGenuchtenKrgLowSteThreshold": {
+        "explanation": [
+            "The threshold saturation below which the relative permeability of the nonwetting phase gets regularized in Parker/vanGenuchten laws."
+        ]
+    },
+    "-.ParkerVanGenuchtenKrnLowSweThreshold": {
+        "explanation": [
+            "The threshold saturation below which the relative permeability of the nonwetting phase gets regularized in Parker/vanGenuchten laws."
+        ]
+    },
+    "-.ParkerVanGenuchtenKrwHighSweThreshold": {
+        "explanation": [
+            "The threshold saturation above which the relative permeability of the wetting phase gets regularized in Parker/vanGenuchten laws."
+        ]
+    },
+    "-.ParkerVanGenuchtenN": {
+        "explanation": [
+            "Shape parameter \\f$\\mathrm{n}\\f$ \\f$\\mathrm{[-]}\\f$ in Parker/vanGenuchten laws."
+        ]
+    },
+    "-.ParkerVanGenuchtenPcHighSweThreshold": {
+        "explanation": [
+            "Threshold saturation above which the capillary pressure is regularized in Parker/vanGenuchten laws."
+        ]
+    },
+    "-.ParkerVanGenuchtenPcLowSweThreshold": {
+        "explanation": [
+            "Threshold saturation below which the capillary pressure is regularized in Parker/vanGenuchten laws. Most problems are very sensitive to this value (e.g. making it smaller might result in very high capillary pressures)."
+        ]
+    },
+    "-.ParkerVanGenuchtenRegardSnrForKrn": {
+        "explanation": [
+            "In Parker/vanGenuchten laws regard the relative non-wetting saturation in the permeability of the non-wetting phase, see Helmig1997."
+        ]
+    },
+    "-.PcData": {
+        "type": [
+            "std::vector<Scalar>"
+        ],
+        "explanation": [
+            "Capillary pressure data for spline material law."
+        ]
+    },
+    "-.PcMax": {
+        "explanation": [
+            "Maximum capillary pressure for calculating the interfacial area between the nonwetting and wetting phase as in Nuske 2014 (https://elib.uni-stuttgart.de/handle/11682/614, page 60) \\cite nuske2014."
+        ]
+    },
+    "-.RegularizationHighSw": {
+        "explanation": [
+            "The capillary pressure at high wetting saturations."
+        ]
+    },
+    "-.RegularizationHighSwFixedSlope": {
+        "explanation": [
+            "A fixed slope of the capillary pressure at high wetting saturations."
+        ]
+    },
+    "-.RegularizationLowSw": {
+        "explanation": [
+            "The capillary pressure at low wetting saturations."
+        ]
+    },
+    "-.Restart": {
+        "explanation": [
+            "The restart time stamp for a previously interrupted simulation"
+        ]
+    },
+    "-.Sgr": {
+        "explanation": [
+            "Residual gas phase saturation."
+        ]
+    },
+    "-.SmoothedLinearLawKrHighS": {
+        "explanation": [
+            "If the saturation is higher than this value, smoothed linear material law changes to a spline for the relative permeability."
+        ]
+    },
+    "-.SmoothedLinearLawKrLowS": {
+        "explanation": [
+            "If the saturation is lower than this value, smoothed linear material law changes to a spline for the relative permeability."
+        ]
+    },
+    "-.SmoothedLinearLawPcMax": {
+        "explanation": [
+            "The maximum capillary pressure used in the smoothed linear law."
+        ]
+    },
+    "-.SmoothedLinearLawPe": {
+        "explanation": [
+            "The entry pressure used in the smoothed linear law."
+        ]
+    },
+    "-.Snr": {
+        "explanation": [
+            "Residual non-wetting phase saturation."
+        ]
+    },
+    "-.SplineNumSwSamples": {
+        "explanation": [
+            "Number of sample points from which the wetting saturation spline is built."
+        ]
+    },
+    "-.SplineSweInterval": {
+        "defaultValue": [
+            "std::array<double, 2>{{0.1, 1.0}"
+        ],
+        "explanation": [
+            "Effective wetting saturation interval for spline material law."
+        ]
+    },
+    "-.SwData": {
+        "type": [
+            "std::vector<Scalar>"
+        ],
+        "explanation": [
+            "Wetting saturation pressure data for spline material law."
+        ]
+    },
+    "-.Swr": {
+        "explanation": [
+            "Residual wetting phase saturation."
+        ]
+    },
+    "-.ThreePNAPLAdsorptionKdNAPL": {
+        "explanation": [
+            "kd parameter for the adsportion of NAPL in a 3 phase simulation."
+        ]
+    },
+    "-.ThreePNAPLAdsorptionRhoBulk": {
+        "explanation": [
+            "bulk density for calculating the adsorption of NAPL in a 3 phase simulation."
+        ]
+    },
+    "-.VanGenuchtenAlpha": {
+        "explanation": [
+            "Shape parameter \\f$\\mathrm{\\alpha}\\f$ \\f$\\mathrm{[1/Pa]}\\f$ in vanGenuchten laws."
+        ]
+    },
+    "-.VanGenuchtenConstantRegularization": {
+        "explanation": [
+            "If specified, a constant value is used for regularization in Parker/vanGenuchten."
+        ]
+    },
+    "-.VanGenuchtenKrnLowSweThreshold": {
+        "explanation": [
+            "The threshold saturation below which the relative permeability of the nonwetting phase gets regularized in vanGenuchten laws."
+        ]
+    },
+    "-.VanGenuchtenKrwHighSweThreshold": {
+        "explanation": [
+            "The threshold saturation above which the relative permeability of the wetting phase gets regularized in vanGenuchten laws."
+        ]
+    },
+    "-.VanGenuchtenL": {
+        "explanation": [
+            "Shape parameter \\f$\\mathrm{m}\\f$ \\f$\\mathrm{[-]}\\f$ in vanGenuchten laws."
+        ]
+    },
+    "-.VanGenuchtenN": {
+        "explanation": [
+            "Shape parameter \\f$\\mathrm{n}\\f$ \\f$\\mathrm{[-]}\\f$ in vanGenuchten laws."
+        ]
+    },
+    "-.VanGenuchtenPcHighSweThreshold": {
+        "explanation": [
+            "Threshold saturation above which the capillary pressure is regularized in vanGenuchten laws."
+        ]
+    },
+    "-.VanGenuchtenPcLowSweThreshold": {
+        "explanation": [
+            "Threshold saturation below which the capillary pressure is regularized in vanGenuchten laws."
+        ]
+    },
+    "Adaptive.BCRefinementThreshold": {
+        "explanation": [
+            "The threshold above which fluxes are treated as non-zero"
+        ]
+    },
+    "Adaptive.MaxLevel": {
+        "explanation": [
+            "The maximum refinement level"
+        ]
+    },
+    "Adaptive.MinLevel": {
+        "explanation": [
+            "The minimum refinement level"
+        ]
+    },
+    "Adaptive.RefineAtDirichletBC": {
+        "explanation": [
+            "Whether to refine at Dirichlet boundaries"
+        ]
+    },
+    "Adaptive.RefineAtFluxBC": {
+        "explanation": [
+            "Whether to refine at Neumann/Robin boundaries"
+        ]
+    },
+    "Adaptive.RefineAtSource": {
+        "explanation": [
+            "Whether to refine where source terms are specified"
+        ]
+    },
+    "Assembly.BoxVolVarsDependOnAllElementDofs": {
+        "defaultValue": [
+            "false"
+        ],
+        "explanation": [
+            "Whether to update all volvars in the stencil or only update the volVars for the scv whose associated dof has been deflected."
+        ],
+        "mode": "manual",
+        "type": [
+            "bool"
+        ]
+    },
+    "Assembly.FCDiamondVolVarsDependOnAllElementDofs": {
+        "defaultValue": [
+            "false"
+        ],
+        "explanation": [
+            "Whether to update all volvars in the stencil or only those of the associated scv"
+        ],
+        "mode": "manual",
+        "type": [
+            "bool"
+        ]
+    },
+    "Assembly.Multithreading": {
+        "explanation": [
+            "Whether to enable multi-threaded assembly"
+        ]
+    },
+    "Assembly.NumericDifference.BaseEpsilon": {
+        "explanation": [
+            "The basic numeric epsilon used in the differentiation  for deflecting primary variables"
+        ]
+    },
+    "Assembly.NumericDifference.PriVarMagnitude": {
+        "explanation": [
+            "The magnitude of the primary variables used for finding a good numeric epsilon for deflecting primary variables."
+        ]
+    },
+    "Assembly.NumericDifferenceMethod": {
+        "explanation": [
+            "The numeric difference method (1: forward differences (default), 0: central differences, -1: backward differences)"
+        ]
+    },
+    "Assembly.PQ1BubbleVolVarsDependOnAllElementDofs": {
+        "defaultValue": [
+            "false"
+        ],
+        "explanation": [
+            "Whether to update all volvars in the stencil or only those of the associated scv"
+        ],
+        "mode": "manual",
+        "type": [
+            "bool"
+        ]
+    },
+    "BinaryCoefficients.GasDiffCoeff": {
+        "explanation": [
+            "The binary diffusion coefficient in gas"
+        ]
+    },
+    "BinaryCoefficients.LiquidDiffCoeff": {
+        "explanation": [
+            "The binary diffusion coefficient in liquid"
+        ]
+    },
+    "Brine.Salinity": {
+        "explanation": [
+            "The salinity"
+        ]
+    },
+    "Component.EnthalpyOfVaporization": {
+        "explanation": [
+            "The enthalpy of the vaporization"
+        ]
+    },
+    "Component.GasDensity": {
+        "explanation": [
+            "The density of the gas"
+        ]
+    },
+    "Component.GasDiffusionCoefficient": {
+        "explanation": [
+            "Binary diffusion coefficient for molecular water and the constant component"
+        ]
+    },
+    "Component.GasDynamicViscosity": {
+        "explanation": [
+            "The dynamic viscosity of the gas"
+        ]
+    },
+    "Component.GasHeatCapacity": {
+        "explanation": [
+            "The heat capacity of the gas"
+        ]
+    },
+    "Component.GasKinematicViscosity": {
+        "explanation": [
+            "The gas kinematic viscosity"
+        ]
+    },
+    "Component.GasThermalConductivity": {
+        "explanation": [
+            "The thermal conductivity of the gas"
+        ]
+    },
+    "Component.HenryComponentInWater": {
+        "explanation": [
+            "Henry coefficient for the constant component in liquid water"
+        ]
+    },
+    "Component.HenryWaterInComponent": {
+        "explanation": [
+            "Henry coefficient for water in the constant component"
+        ]
+    },
+    "Component.LiquidDensity": {
+        "defaultValue": [
+            "-"
+        ],       
+        "explanation": [
+            "The density of the liquid"
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Component.LiquidDiffusionCoefficient": {
+        "explanation": [
+            "Diffusion coefficient for the constant component in liquid water"
+        ]
+    },
+    "Component.LiquidDynamicViscosity": {
+        "defaultValue": [
+            "-"
+        ],    
+        "explanation": [
+            "The dynamic viscosity of the liquid"
+        ],
+       	"mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Component.LiquidHeatCapacity": {
+        "explanation": [
+            "Specific isobaric heat capacity of the component \\f$\\mathrm{[J/(kg*K)]}\\f$ as a liquid."
+        ]
+    },
+    "Component.LiquidKinematicViscosity": {
+        "explanation": [
+            "The liquid kinematic viscosity"
+        ]
+    },
+    "Component.LiquidThermalConductivity": {
+        "explanation": [
+            "Thermal conductivity of the component \\f$\\mathrm{[W/(m*K)]}\\f$ as a liquid."
+        ]
+    },
+    "Component.MolarMass": {
+        "explanation": [
+            "The mass in one mole of the component"
+        ]
+    },
+    "Component.Name": {
+        "explanation": [
+            "A human readable name for the component"
+        ]
+    },
+    "Component.ReferenceTemperature": {
+        "explanation": [
+            "The reference temperature in \\f$\\mathrm{[K]}\\f$ used when calculating the specific internal energy of a constant component as a liquid."
+        ]
+    },
+    "Component.SolidDensity": {
+        "explanation": [
+            "The density of the component in solid state"
+        ]
+    },
+    "Component.SolidHeatCapacity": {
+        "explanation": [
+            "Specific isobaric heat capacity of the component as a solid"
+        ]
+    },
+    "Component.SolidThermalConductivity": {
+        "explanation": [
+            "Thermal conductivity of the component as a solid"
+        ]
+    },
+    "Component.TriplePressure": {
+        "explanation": [
+            "The triple pressure of the component"
+        ]
+    },
+    "Component.TripleTemperature": {
+        "explanation": [
+            "The triple temperature of the component"
+        ]
+    },
+    "DualNetwork.Bi": {
+        "explanation": [
+            "The Biot number."
+        ],
+        "type": [
+            "Scalar"
+        ],
+        "defaultValue": [
+            "1.0"
+        ]
+    },
+    "DualNetwork.ConnectionAreaShapeFactor": {
+        "explanation": [
+            "The factor for the connection are shape."
+        ],
+        "type": [
+            "Scalar"
+        ],
+        "defaultValue": [
+            "0.9"
+        ]
+    },
+    "DualNetwork.ConvectionLambaExponent": {
+        "explanation": [
+            "The exponent for the convection lambda."
+        ],
+        "type": [
+            "Scalar"
+        ],
+        "defaultValue": [
+            "0.4"
+        ]
+    },
+    "DualNetwork.ConvectionLambaFactor": {
+        "explanation": [
+            "The multiplicative factor for the convection lambda."
+        ],
+        "type": [
+            "Scalar"
+        ],
+        "defaultValue": [
+            "0.9"
+        ]
+    },
+    "DualNetwork.FixedConvectionLambda": {
+        "explanation": [
+            "Fixed value for the convecion lambda if used."
+        ],
+        "type": [
+            "Scalar"
+        ],
+        "defaultValue": [
+            "-1.0"
+        ]
+    },
+    "DualNetwork.FluidTemperatureMode": {
+        "explanation": [
+            "The computation mode of the fluid temperature."
+        ],
+        "type": [
+            "std::string"
+        ],
+        "defaultValue": [
+            "mean"
+        ]
+    },
+    "DualNetwork.Nu": {
+        "explanation": [
+            "The Nusselt number."
+        ],
+        "type": [
+            "Scalar"
+        ],
+        "defaultValue": [
+            "1.0"
+        ]
+    },
+    "DualNetwork.OverlapFactor": {
+        "explanation": [
+            "The overlap factor for the computation of exact pore radius."
+        ]
+    },
+    "DualNetwork.SourceVerboseForDof": {
+        "explanation": [
+            "Whether status should be printed."
+        ],
+        "type": [
+            "int"
+        ],
+        "defaultValue": [
+            "-1"
+        ]
+    },
+    "DualNetwork.SphereRadius": {
+        "explanation": [
+            "The radius of a spherical pore."
+        ],
+        "type": [
+            "Scalar"
+        ],
+        "defaultValue": [
+            "50e-6"
+        ]
+    },
+    "DualNetwork.UseAverageConvectionArea": {
+        "explanation": [
+            "Whether to use an averaged convection area."
+        ],
+        "type": [
+            "bool"
+        ],
+        "defaultValue": [
+            "false"
+        ]
+    },
+    "DualNetwork.UseExactConnectionAreaSphere": {
+        "explanation": [
+            "Whether to use the exact connection area."
+        ],
+        "type": [
+            "bool"
+        ],
+        "defaultValue": [
+            "false"
+        ]
+    },
+    "DualNetwork.UseExactConnectionLength": {
+        "explanation": [
+            "Whether to use the exact connection length."
+        ],
+        "type": [
+            "bool"
+        ],
+        "defaultValue": [
+            "false"
+        ]
+    },
+    "DualNetwork.UseExactPoreRadiusSolid": {
+        "explanation": [
+            "Whether to use the exact pore radius for the solid."
+        ],
+        "type": [
+            "bool"
+        ],
+        "defaultValue": [
+            "false"
+        ]
+    },
+    "DualNetwork.UseExactPoreRadiusVoid": {
+        "explanation": [
+            "Whether to use the exact pore radius for the void space."
+        ],
+        "type": [
+            "bool"
+        ],
+        "defaultValue": [
+            "false"
+        ]
+    },
+    "ElectroChemistry.ActivationBarrier": {
+        "explanation": [
+            "The activation barrier to calculate the exchange current density."
+        ]
+    },
+    "ElectroChemistry.CellVoltage": {
+        "explanation": [
+            "The voltage of the fuel cell."
+        ]
+    },
+    "ElectroChemistry.MaxIterations": {
+        "explanation": [
+            "The maximum number of iterations in iteatively (Newton solver) calculating the current density."
+        ]
+    },
+    "ElectroChemistry.NumElectrons": {
+        "explanation": [
+            "The number of electrons for the calculation of activation and concentration losses."
+        ]
+    },
+    "ElectroChemistry.RefCurrentDensity": {
+        "explanation": [
+            "The reference current density to calculate the exchange current density."
+        ]
+    },
+    "ElectroChemistry.RefO2PartialPressure": {
+        "explanation": [
+            "The reference oxygen partial pressure."
+        ]
+    },
+    "ElectroChemistry.RefTemperature": {
+        "explanation": [
+            "The reference temperature to calculate the exchange current density."
+        ]
+    },
+    "ElectroChemistry.ReversibleVoltage": {
+        "explanation": [
+            "The reversible voltage."
+        ]
+    },
+    "ElectroChemistry.SpecificResistance": {
+        "explanation": [
+            "The specific resistance, see \\cite A3:acosta:2006."
+        ]
+    },
+    "ElectroChemistry.SurfaceIncreasingFactor": {
+        "explanation": [
+            "The surface-increasing factor to calculate the exchange current density."
+        ]
+    },
+    "ElectroChemistry.ThermoneutralVoltage": {
+        "explanation": [
+            "Thermoneutral voltage for the non-isothermal electrochemistry model."
+        ]
+    },
+    "ElectroChemistry.TransferCoefficient": {
+        "explanation": [
+            "The transport coefficient."
+        ]
+    },
+    "ElectroChemistry.TransportNumberH20": {
+        "explanation": [
+            "The water transport number to calculate the osmotic term in the membrane."
+        ]
+    },
+    "ElectroChemistry.pO2Inlet": {
+        "explanation": [
+            "The oxygen pressure at the inlet."
+        ]
+    },
+    "FacetCoupling.Xi": {
+        "explanation": [
+            "The xi factor for coupling conditions"
+        ]
+    },
+    "Flux.DifferencingScheme": {
+        "explanation": [
+            "Choice of a staggered TVD method"
+        ]
+    },
+    "Flux.EnableOutflowReversalWarning": {
+        "explanation": [
+            "Whether to print warning by flow reversal"
+        ]
+    },
+    "Flux.TvdApproach": {
+        "explanation": [
+            "If you use a staggered grid with a TVD approach: For a uniform grid \"Uniform\" is fine. For a nonuniform grid decide between \"Li\" and \"Hou\" (two literature-based methods)."
+        ]
+    },
+    "Flux.UpwindWeight": {
+        "explanation": [
+            "Upwind weight in staggered upwind method"
+        ]
+    },
+    "FluxLimiterLET.LowerWaterDepth": {
+        "explanation": [
+            "The lower water depth"
+        ]
+    },
+    "FluxLimiterLET.UpperWaterDepth": {
+        "explanation": [
+            "The upper water depth"
+        ]
+    },
+    "FluxLimiterLET.UpwindFluxLimiting": {
+        "explanation": [
+            "If this is set true, the upwind water depth from the flux direction is used. This can improve stability."
+        ]
+    },
+    "FluxOverAxisAlignedSurface.Verbose": {
+        "explanation": [
+            "For enabling or disabling the console output"
+        ]
+    },
+    "FluxOverSurface.Verbose": {
+        "explanation": [
+            "For enabling or disabling the console output"
+        ]
+    },
+    "Forchheimer.MaxIterations": {
+        "explanation": [
+            "The maximum number of Newton iterations for solving the Forchheimer equation"
+        ]
+    },
+    "Forchheimer.NewtonTolerance": {
+        "explanation": [
+            "The error tolerance in the Newton method for solving the Forchheimer equation"
+        ]
+    },
+    "FouriersLaw.UseVolumeEqualPyramid":{
+        "explanation": [
+            "Whether to deduce pyramid base length from volume. The base side length for the frustum of the pyramid is obtained by assuming that the volume of the frustum is the same as half the volume of the pore body. Otherwise the side length is set as the diameter of the pore body."
+        ],
+        "type": [
+            "bool"
+        ],
+        "defaultValue": [
+            "false"
+        ]
+    },
+    "FreeFlow.EnableDilatationTerm": {
+        "explanation": [
+            "For enabling the turbulent dilation term."
+        ]
+    },
+    "FreeFlow.EnableUnsymmetrizedVelocityGradient": {
+        "explanation": [
+            "For enabling unsymmetrized velocity gradient. If false consider the shear stress caused by the gradient of the velocities normal to our face of interest."
+        ]
+    },
+    "FreeFlow.EnableUnsymmetrizedVelocityGradientForBeaversJoseph": {
+        "explanation": [
+            "For enabling unsymmetrized velocity gradient for the Beavers Joseph coupling condition. If true and if the current scvf is on a boundary and if a Dirichlet BC for the pressure or a BJ condition for the slip velocity is set there, assume a tangential velocity gradient of zero along the lateral face."
+        ]
+    },
+    "FreeFlow.UseOldTransportingVelocity": {
+        "explanation": [
+            "Whether to use the old transporting velocity"
+        ]
+    },
+    "Grid.AddThroatVolumeToPoreVolume": {
+        "explanation": [
+            "Whether to add the throat volume to the pore volume."
+        ]
+    },
+    "Grid.AllowIntersectingDiagonals": {
+        "explanation": [
+            "Whether to allow diagonals to intersect in the context of the generation of a structured-lattice pore-network."
+        ]
+    },
+    "Grid.Angular0/1/2": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "min/max value for angular coordinate. Cake grids can be created by either specifying Radial,Angular or Axial in all coordinate directions."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<Scalar>"
+        ]
+    },
+    "Grid.Axial0/1/2": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "min/max value for axial coordinate. Cake grids can be created by either specifying Radial,Angular or Axial in all coordinate directions."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<Scalar>"
+        ]
+    },
+    "Grid.BinaryMask": {
+        "explanation": [
+            "Name of the mask file."
+        ],
+        "type": [
+            "std::string"
+        ]
+    },
+
+    "Grid.BoundaryPoreLabels": {
+        "explanation": [
+            "With this, the boundary faces can be set in the format xmin xmax ymin ymax (zmin zmax)."
+        ]
+    },
+    "Grid.BoundarySegments": {
+        "explanation": [
+            "For the dune gmsh reader: Whether to insert boundary segments into the grid"
+        ]
+    },
+    "Grid.CapPoreRadii": {
+        "explanation": [
+            "If true a maximal pore radius is set."
+        ]
+    },
+    "Grid.CapPoresOnBoundaries": {
+        "explanation": [
+            "A vector of boundary indices of for which the pore volume should be halved in a direction within automatically determining the pore volume"
+        ]
+    },
+    "Grid.CellType": {
+        "explanation": [
+            "\"Cube\" or \"Simplex\" to be used for structured grids"
+        ]
+    },
+    "Grid.Cells": {
+        "type": [
+            "std::array<unsigned int, dim>"
+        ],
+        "defaultValue": [
+            "{1, 1, 1}"
+        ],
+        "explanation": [
+            "The number of elements in a structured uniform grid in x, y and z direction"
+        ]
+    },
+    "Grid.Cells0/1/2": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "For a grid with zones, number of cells of the leftmost zone, number of cells of the second-leftmost zone, ..., number of cells of the rightmost zone, spaceseparated. (assuming x-axis points to the right)"
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<int>"
+        ]
+    },
+    "Grid.CellsPerThroat": {
+        "explanation": [
+            "the number of cells above the porous medium"
+        ]
+    },
+    "Grid.ClosureType": {
+        "explanation": [
+            "Decide whether to add a green closure to locally refined grid sections or not: \"Green\" (Standard red/green refinement) or \"None\" (No closure, results in nonconforming meshes)"
+        ]
+    },
+    "Grid.Coordinates": {
+        "explanation": [
+            "To construct a 1D grid with just a coordinates vector"
+        ]
+    },
+    "Grid.CouplinglineNormal": {
+        "defaultValue": [
+            "{0,0,1}"
+        ],
+        "explanation": [
+            "The normal direction of the coupled interface"
+        ],
+        "mode": "manual",
+        "type": [
+            "GlobalPosition"
+        ]
+    },
+    "Grid.CouplingPlaneLowerLeft": {
+        "defaultValue": [
+            "Grid.LowerLeft"
+        ],
+        "explanation": [
+            "the lower left point of the coupling plane"
+        ]
+    },
+    "Grid.CouplingPlaneUpperRight": {
+        "explanation": [
+            "The upper right point of the coupling plane. Default value is based on the gridLowerLeft and uses the coordinate of gridUpperRight in the direction parallel to the coupling plane."
+        ]
+    },
+    "Grid.DeletionProbability": {
+        "explanation": [
+            "For a non-regular lattice, you must specify deletion probabilities for deleting throats in all directions. For example (3D): DeletionProbability = 0.5 0.5 0 0 0 0 0 0 0 0 0 0 0 deletes approximately 50% of all throats in x and y direction, while no deletion in any other direction takes place. In 2D four values are required (x (1,0),y (0,1) and two diagnals through cell midpoint (1,1),(1,-1)). In 3D thirteen values are required (x(1,0,0),y(0,1,0),z(0,0,1), six face diagonals (1,1,0),(1,-1,0),(1,0,1),(1,0,-1),(0,1,1),(0,1,-1) and four diagonals through cell midpoint (1,1,1),(1,1,-1),(-1,1,1),(-1,-1,1)."
+        ]
+    },
+    "Grid.DeletionRandomNumberSeed": {
+        "explanation": [
+            "A seed for the random number generation for the random deletion of connecting throats."
+        ]
+    },
+    "Grid.DomainMarkers": {
+        "explanation": [
+            "Whether the grid managers work with domain markers."
+        ]
+    },
+    "Grid.DownstreamCells0/1/2": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "(The number of the user-defined additional points + 1) in each normal direction in the downstream area of a snappy grid. "
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<Int>"
+        ]
+    },
+    "Grid.DownstreamGrading0/1/2": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Grading factor for the user-defined additional points  in each normal direction in the downstream area of a snappy grid. "
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<Scalar>"
+        ]
+    },
+    "Grid.DownstreamPositions0/1/2": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "User-defined additional points in the normal directions in the downstream area of a snappy grid."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<Scalar>"
+        ]
+    },
+    "Grid.File": {
+        "explanation": [
+            "A DGF or gmsh file to load from"
+        ]
+    },
+    "Grid.FixedCellsBetweenThroats": {
+        "explanation": [
+            "the number of cells between two throats"
+        ]
+    },
+    "Grid.FixedPoreRadiusForLabel": {
+        "defaultValue": [
+            "std::vector<Scalar>{}"
+        ],
+        "explanation": [
+            "Vector of pore radii to be set to the corresponding pores not belonging to a subregion indicated by PoreLabelsToSetFixedRadius."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<Scalar>"
+        ]
+    },
+    "Grid.GmshPhysicalEntityThreshold": {
+        "explanation": [
+            "Boundary element index threshold"
+        ]
+    },
+    "Grid.Grading0/1/2": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "For a grid with zones, grading factors for the x-zones. 1.0 means all cells within this zone have equal extension in x-direction. Negative factors are possible."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<Scalar>"
+        ]
+    },
+    "Grid.Image": {
+        "explanation": [
+            "The image file if the sub grid is constructed from a raster image"
+        ]
+    },
+    "Grid.KeepOnlyConnected": {
+        "explanation": [
+            "Whether non-connected cells should be removed."
+        ]
+    },
+    "Grid.KeepPhysicalOverlap": {
+        "explanation": [
+            "Whether to keep the physical overlap in physical size or in number of cells upon refinement"
+        ]
+    },
+    "Grid.LeftBoundary": {
+        "explanation": [
+            "The start coordinate of a 1D grid"
+        ]
+    },
+    "Grid.LowerLeft": {
+        "explanation": [
+            "The lowerLeft corner of a structured grid"
+        ]
+    },
+    "Grid.MakeConsistentlyOriented": {
+        "explanation": [
+            "Whether to make sure that all element intersections follow the same local orientation and indexing no matter how the elements may be rotated or twisted."
+        ]
+    },
+    "Grid.Marker": {
+        "explanation": [
+            "To customize the subgrid generation."
+        ]
+    },
+    "Grid.MaxPoreInscribedRadius": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "In the case of a uniform random distribution, this specifies the maximum pore radius."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.MeanPoreInscribedRadius": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "In the case of a lognormal random distribution, this specifies the mean pore radius."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.MinPoreInscribedRadius": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "In the case of a uniform random distribution, this specifies the minimum pore radius."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.MinThroatLength": {
+        "explanation": [
+            "The minimum pore throat length."
+        ]
+    },
+    "Grid.NumPores": {
+        "explanation": [
+            "The number of pores for a 1D grid. For a more-dimensional grid the number of pores in x,y (and z) direction."
+        ]
+    },
+    "Grid.NumSubregions": {
+        "explanation": [
+            "The number of subregions within a pore-network model."
+        ]
+    },
+    "Grid.Overlap": {
+        "explanation": [
+            "The overlap size in cells"
+        ]
+    },
+    "Grid.OverwriteGridDataWithShapeSpecificValues": {
+        "explanation": [
+            "If Grid.ThroatCrossSectionShape is set, here one can set to overwrite the grid data with the shape-specific values."
+        ]
+    },
+    "Grid.ParameterRandomNumberSeed": {
+        "defaultValue": [
+            "std::random_device{}()"
+        ],
+        "explanation": [
+            "If PoreInscribedRadius is not set, this allows to specify a seed to get reproducible results."
+        ],
+        "mode": "manual",
+        "type": [
+            "unsigned int"
+        ]
+    },
+    "Grid.ParameterType": {
+        "defaultValue": [
+            "\"lognormal\""
+        ],
+        "explanation": [
+            "If PoreInscribedRadius is not set, this allows to specify the type of random distribution for the radii. Possible values are \"lognormal\" and \"uniform\"."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::string"
+        ]
+    },
+    "Grid.Partitioning": {
+        "explanation": [
+            "A non-standard load-balancing, number of processors per direction"
+        ]
+    },
+    "Grid.Periodic": {
+        "explanation": [
+            "True or false for each direction"
+        ]
+    },
+    "Grid.PixelDimensions": {
+        "explanation": [
+            "For subgrid generation, this can be used to specify the UpperRight position. To calculate UpperRight this is in every dimension multiplied by the number of cells and added to LowerLeft."
+        ]
+    },
+    "Grid.PoreGeometry": {
+        "explanation": [
+            "Pore geometry shape. Possibilities are \"Square\", \"Circle\", \"Cube\", \"Sphere\", \"Cylinder\", \"Tetrahedron\", \"Octahedron\", \"Icosahedron\" or \"Dodecahedron\"."
+        ]
+    },
+    "Grid.PoreHeight": {
+        "explanation": [
+            "A fixed pore height."
+        ]
+    },
+    "Grid.PoreInscribedRadius": {
+        "defaultValue": [
+            "-1.0"
+        ],
+        "explanation": [
+            "If this is set, all pore radii of pore bodies not belonging to a subregion are set to this value. If this is not set, a random radius is set according to a user-specified distribution."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.PoreLabelsToApplyFactorForRadius": {
+        "defaultValue": [
+            "std::vector<int>{}"
+        ],
+        "explanation": [
+            "Labels of pores of pores bodies not belonging to a subregion which should be treated by applying a factor for the radius."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<int>"
+        ]
+    },
+    "Grid.PoreLabelsToSetFixedRadius": {
+        "defaultValue": [
+            "std::vector<int>{}"
+        ],
+        "explanation": [
+            "Labels of pores of pores bodies not belonging to a subregion which should be treated by setting a fixed radius."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<int>"
+        ]
+    },
+    "Grid.PoreRadiusFactorForLabel": {
+        "defaultValue": [
+            "std::vector<Scalar>{}"
+        ],
+        "explanation": [
+            "Vector of factors for the radii of the corresponding pores not belonging to a subregion indicated by PoreLabelsToApplyFactorForRadius."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<Scalar>"
+        ]
+    },
+    "Grid.Positions0/1/2": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "For a grid with zones, x/y/z-positions of the left of the leftmost zone followed by the right of all zones (from left to right). (assuming x-axis points to the right)"
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<ctype>"
+        ]
+    },
+    "Grid.PriorityList": {
+        "explanation": [
+            "The priority which decides the order the vertices on the boundary are indexed. By default, vertices on min/max faces in x direction have the highest priority, followed by y and z."
+        ]
+    },
+    "Grid.PruningSeedIndices": {
+        "explanation": [
+            "Indices from which to start the search process for finding elements not connected to pores at a Dirichlet boundary, which are then removed."
+        ]
+    },
+    "Grid.Radial0/1/2": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "min/max value for radial coordinate. Cake grids can be created by either specifying Radial,Angular or Axial in all coordinate directions."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<Scalar>"
+        ]
+    },
+    "Grid.Refinement": {
+        "explanation": [
+            "The number of global refines to perform"
+        ]
+    },
+    "Grid.RefinementType": {
+        "explanation": [
+            "e.g. UGGrid \"Local\" (New level consists only of the refined elements and the closure) or \"Copy\" (New level consists of the refined elements and the unrefined ones, too)"
+        ]
+    },
+    "Grid.RegularLattice": {
+        "explanation": [
+            "A regular lattice is when pore are always connected parallel to the main axes and never connected in other directions."
+        ]
+    },
+    "Grid.RemoveThroatsOnBoundary": {
+        "explanation": [
+            "Whether the throats on the boundary should be removed."
+        ]
+    },
+    "Grid.Repeat": {
+        "explanation": [
+            "Number of times to repeat the subgrid pattern in each dimension."
+        ]
+    },
+    "Grid.RightBoundary": {
+        "explanation": [
+            "The end coordinate of a 1D grid"
+        ]
+    },
+    "Grid.SanitationMode": {
+        "explanation": [
+            "The mode of sanitation. Sanitation is a post-processing to remove insular groups of elements that are not connected to a Dirichlet boundary. Possible modes are \"UsePoreLabels\" (keep cluster connected to a specific pore given by a pore label) and \"KeepLargestCluster\"."
+        ]
+    },
+    "Grid.Sanitize": {
+        "explanation": [
+            "Whether to sanitize the grid. Sanitizing is a post-processing to remove insular groups of elements that are not connected to a Dirichlet boundary."
+        ]
+    },
+    "Grid.StandardDeviationPoreInscribedRadius": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "In the case of a lognormal random distribution, this specifies the standard deviation of the pore radius."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.Subregion0,1,....FixedPoreRadiusForLabel": {
+        "defaultValue": [
+            "std::vector<Scalar>{}"
+        ],
+        "explanation": [
+            "Vector of pore radii to be set to the corresponding pores within this subregion indicated by PoreLabelsToSetFixedRadius."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<Scalar>"
+        ]
+    },
+    "Grid.Subregion0,1,....LowerLeft": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Gives the lower left corner position of the subregion grid in the context of a pore-network."
+        ],
+        "mode": "manual",
+        "type": [
+            "GlobalPosition"
+        ]
+    },
+    "Grid.Subregion0,1,....MaxPoreInscribedRadius": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "In the case of a uniform random distribution, this specifies the maximum pore radius."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.Subregion0,1,....MeanPoreInscribedRadius": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "In the case of a lognormal random distribution, this specifies the mean pore radius."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.Subregion0,1,....MinPoreInscribedRadius": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "In the case of a uniform random distribution, this specifies the minimum pore radius."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.Subregion0,1,....ParameterRandomNumberSeed": {
+        "defaultValue": [
+            "std::random_device{}()"
+        ],
+        "explanation": [
+            "If PoreInscribedRadius is not set, this allows to specify a seed to get reproducible results."
+        ],
+        "mode": "manual",
+        "type": [
+            "unsigned int"
+        ]
+    },
+    "Grid.Subregion0,1,....ParameterType": {
+        "defaultValue": [
+            "\"lognormal\""
+        ],
+        "explanation": [
+            "If PoreInscribedRadius is not set, this allows to specify the type of random distribution for the radii. Possible values are \"lognormal\" and \"uniform\"."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::string"
+        ]
+    },
+    "Grid.Subregion0,1,....PoreInscribedRadius": {
+        "defaultValue": [
+            "-1.0"
+        ],
+        "explanation": [
+            "If this is set, all pore radii of pore bodies of this subregion are set to this value. If this is not set, a random radius is set according to a user-specified distribution."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.Subregion0,1,....PoreLabelsToApplyFactorForRadius": {
+        "defaultValue": [
+            "std::vector<int>{}"
+        ],
+        "explanation": [
+            "Labels of pores of pores bodies within this subregion which should be treated by applying a factor for the radius, case with subregions."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<int>"
+        ]
+    },
+    "Grid.Subregion0,1,....PoreLabelsToSetFixedRadius": {
+        "defaultValue": [
+            "std::vector<int>{}"
+        ],
+        "explanation": [
+            "Labels of pores of pores bodies within this subregion which should be treated by setting a fixed radius."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<int>"
+        ]
+    },
+    "Grid.Subregion0,1,....PoreRadiusFactorForLabel": {
+        "defaultValue": [
+            "std::vector<Scalar>{}"
+        ],
+        "explanation": [
+            "Vector of factors for the radii of the corresponding pores within this subregion indicated by PoreLabelsToApplyFactorForRadius."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<Scalar>"
+        ]
+    },
+    "Grid.Subregion0,1,....StandardDeviationPoreInscribedRadius": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "In the case of a lognormal random distribution, this specifies the standard deviation of the pore radius."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.Subregion0,1,....SubstractRadiiFromThroatLength": {
+        "defaultValue": [
+            "true"
+        ],
+        "explanation": [
+            "Decide whether to subtract the pore radii from the throat length or not for a pore throat belonging to this subregion."
+        ],
+        "mode": "manual",
+        "type": [
+            "bool"
+        ]
+    },
+    "Grid.Subregion0,1,....ThroatInscribedRadius": {
+        "defaultValue": [
+            "-1.0"
+        ],
+        "explanation": [
+            "Radius of a pore throat belonging to this subregion."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.Subregion0,1,....ThroatInscribedRadiusN": {
+        "defaultValue": [
+            "0.1"
+        ],
+        "explanation": [
+            "Shape parameter for the calculation of the radius of a pore throat belonging to this subregion when ThroatInscribedRadius is not set."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.Subregion0,1,....ThroatLength": {
+        "defaultValue": [
+            "-1.0"
+        ],
+        "explanation": [
+            "Length of a pore throat belonging to this subregion."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.Subregion0,1,....UpperRight": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Gives the upper right corner position of the subregion grid in the context of a pore-network."
+        ],
+        "mode": "manual",
+        "type": [
+            "GlobalPosition"
+        ]
+    },
+    "Grid.Subregion0,1,....SubstractPoreInscribedRadiiFromThroatLength": {
+        "defaultValue": [
+            "true"
+        ],
+        "explanation": [
+            "Decide whether to subtract the pore radii from the throat length or not for a pore throat not belonging to a subregion."
+        ],
+        "mode": "manual",
+        "type": [
+            "bool"
+        ]
+    },
+    "Grid.SubstractPoreInscribedRadiiFromThroatLength": {
+        "defaultValue": [
+            "true"
+        ],
+        "explanation": [
+            "Decide whether to subtract the pore radii from the throat length or not for a pore throat not belonging to a subregion."
+        ],
+        "mode": "manual",
+        "type": [
+            "bool"
+        ]
+    },
+    "Grid.ThroatCrossSectionShape": {
+        "explanation": [
+            "A geometry that should be used for all throatcrosssections. The possibilities are \"ScaleneTriangle\", \"EquilateralTriangle\", \"Square\", \"Rectangle\", \"Circle\", \"TwoPlates\", \"Polygon\"."
+        ]
+    },
+    "Grid.ThroatHeight": {
+        "explanation": [
+            "Throat height for a rectangle-shaped throat cross section."
+        ]
+    },
+    "Grid.ThroatInscribedRadius": {
+        "defaultValue": [
+            "-1.0"
+        ],
+        "explanation": [
+            "Radius of a pore throat not belonging to a subregion."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.ThroatInscribedRadiusN": {
+        "defaultValue": [
+            "0.1"
+        ],
+        "explanation": [
+            "Shape parameter for the calculation of the radius of a pore throat not belonging to a subregion when ThroatInscribedRadius is not set."
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "Grid.ThroatLength": {
+        "explanation": [
+            "A user-specified fixed throat length."
+        ]
+    },
+    "Grid.ThroatShapeFactor": {
+        "explanation": [
+            "Throat shape factor for a polygonal throat cross section or a scalene triangle one."
+        ]
+    },
+    "Grid.UpperRight": {
+        "explanation": [
+            "The upperright corner of a structured grid"
+        ]
+    },
+    "Grid.UpstreamCells0/1/2": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "(The number of the user-defined additional points + 1) in each normal direction in the upstream area of a snappy grid. "
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<Int>"
+        ]
+    },
+    "Grid.UpstreamGrading0/1/2": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Grading factor for the user-defined additional points  in each normal direction in the upstream area of a snappy grid. "
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<Scalar>"
+        ]
+    },
+    "Grid.UpstreamPositions0/1/2": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "User-defined additional points in each normal direction in the upstream area of a snappy grid. "
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<Scalar>"
+        ]
+    },
+    "Grid.Verbosity": {
+        "explanation": [
+            "Whether the grid construction should output to standard out"
+        ]
+    },
+    "InvasionState.AccuracyCriterion": {
+        "explanation": [
+            "Specifies the allowed relative deviation of the capillary pressure of the upstream pore from the throat's entry capillary pressure after an invasion event. This effectively forces the Newton scheme to use very small time steps at invasion events. A value of 0.9 means that pc must not be smaller than 0.9*pc_entry after the invasion."
+        ]
+    },
+    "InvasionState.BlockNonwettingPhaseAtThroatLabel": {
+        "explanation": [
+            "A vector of labels of throats. Block non-wetting phase flux out of the outlet."
+        ]
+    },
+    "InvasionState.RestrictInvasionToGlobalCapillaryPressure": {
+        "explanation": [
+            "Whether to restrict the invasion behavior by a global capillary pressure defined in the problem."
+        ]
+    },
+    "InvasionState.Verbosity": {
+        "explanation": [
+            "Whether to print detailed invasion information."
+        ]
+    },
+    "KEpsilon.EnableZeroEqScaling": {
+        "explanation": [
+            "Whether to match the potential zeroeq eddy viscosities for two-layer model at the matching point"
+        ]
+    },
+    "KEpsilon.YPlusThreshold": {
+        "explanation": [
+            "yPlus below this value is considered as near-wall region"
+        ]
+    },
+    "KOmega.EnableDissipationLimiter": {
+        "explanation": [
+            "Whether to enable the dissipation limiter"
+        ]
+    },
+    "KOmega.EnableProductionLimiter": {
+        "explanation": [
+            "Whether to enable the production limiter"
+        ]
+    },
+    "LinearPDESolver.EnableDynamicOutput": {
+        "explanation": [
+            "Whether dynamic output should be enabled."
+        ]
+    },
+    "LinearSolver.DirectSolverForVelocity": {
+        "mode": "ignore"
+    },
+    "LinearSolver.GMResRestart": {
+        "defaultValue": [
+            "10"
+        ],
+        "explanation": [
+            "cycles before restarting"
+        ],
+        "mode": "manual",
+        "type": [
+            "int"
+        ]
+    },
+    "LinearSolver.MaxIterations": {
+        "defaultValue": [
+            "250"
+        ],
+        "explanation": [
+            "The maximum iterations of the linear solver"
+        ],
+        "mode": "manual",
+        "type": [
+            "int"
+        ]
+    },
+    "LinearSolver.MaxOrthogonalizationVectors": {
+        "defaultValue": [
+            "10"
+        ],
+        "explanation": [
+            "Maximal number of previous vectors which are orthogonalized against the new search direction"
+        ],
+        "mode": "manual",
+        "type": [
+            "int"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgAccumulationMode": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "If and how data is agglomerated on coarser level to fewer processors. (\"atOnce\": do agglomeration once and to one process; \"successive\": Multiple agglomerations to fewer processes until all data is on one process; \"none\": Do no agglomeration at all and solve coarse level iteratively)."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::string"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgAdditive": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Whether to use additive multigrid."
+        ],
+        "mode": "manual",
+        "type": [
+            "bool"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgAlpha": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Scaling value for marking connections as strong."
+        ],
+        "mode": "manual",
+        "type": [
+            "double"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgBeta": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Threshold for marking nodes as isolated."
+        ],
+        "mode": "manual",
+        "type": [
+            "double"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgCoarsenTarget": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Maximum number of unknowns on the coarsest level."
+        ],
+        "mode": "manual",
+        "type": [
+            "int"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgCriterionSymmetric": {
+        "defaultValue": [
+            "true"
+        ],
+        "explanation": [
+            "If true use SymmetricCriterion (default), else UnSymmetricCriterion"
+        ],
+        "mode": "manual",
+        "type": [
+            "bool"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgDefaultAggregationDimension": {
+        "defaultValue": [
+            "std::to_string(dimension)"
+        ],
+        "explanation": [
+            "Dimension of the problem (used for setting default aggregate size)."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::size_t"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgDefaultAggregationSizeMode": {
+        "defaultValue": [
+            "isotropic"
+        ],
+        "explanation": [
+            "Whether to set default values depending on isotropy of problem uses parameters \"defaultAggregationDimension\" and \"maxAggregateDistance\" (isotropic: For and isotropic problem; anisotropic: for an anisotropic problem)."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::string"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgDiagonalRowIndex": {
+        "defaultValue": [
+            "0"
+        ],
+        "explanation": [
+            "The index to use for the diagonal strength (default 0) if this is i and strengthMeasure is \"diagonal\", then block[i][i] will be used when determining strength of connection."
+        ],
+        "mode": "manual",
+        "type": [
+            "int"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgGamma": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "1 for V-cycle, 2 for W-cycle."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::size_t"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgMaxAggregateDistance": {
+        "defaultValue": [
+            "2"
+        ],
+        "explanation": [
+            "Maximum distance in an aggregte (in term of minimum edges needed to travel. one vertex to another within the aggregate)."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::size_t"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgMaxAggregateSize": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Maximum number of vertices an aggregate should consist of."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::size_t"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgMaxLevel": {
+        "defaultValue": [
+            "100"
+        ],
+        "explanation": [
+            "Maximum number of levels allowed in the hierarchy."
+        ],
+        "mode": "manual",
+        "type": [
+            "int"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgMinAggregateSize": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Minimum number of vertices an aggregate should consist of."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::size_t"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgMinCoarseningRate": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Coarsening will stop if the rate is below this threshold."
+        ],
+        "mode": "manual",
+        "type": [
+            "int"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgPostSmoothingSteps": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Number of postsmoothing steps."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::size_t"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgPreSmoothingSteps": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Number of presmoothing steps."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::size_t"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgProlongationDampingFactor": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Damping factor for the prolongation."
+        ],
+        "mode": "manual",
+        "type": [
+            "double"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgSmootherIterations": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "The number of iterations to perform."
+        ],
+        "mode": "manual",
+        "type": [
+            "int"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgSmootherRelaxation": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "The relaxation factor"
+        ],
+        "mode": "manual",
+        "type": [
+            "double"
+        ]
+    },
+    "LinearSolver.Preconditioner.AmgStrengthMeasure": {
+        "defaultValue": [
+            "diagonal"
+        ],
+        "explanation": [
+            "What conversion to use to convert a matrix block to a scalar when determining strength of connection: diagonal (use a diagonal of row diagonalRowIndex, class Diagonal, default); rowSum (rowSum norm), frobenius (Frobenius norm); one (use always one and neglect the actual entries)."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::string"
+        ]
+    },
+    "LinearSolver.Preconditioner.DetermineRelaxationFactor": {
+        "defaultValue": [
+            "true"
+        ],
+        "explanation": [
+            "Whether within the Uzawa algorithm the parameter omega is the relaxation factor is estimated by use of AMG"
+        ],
+        "mode": "manual",
+        "type": [
+            "bool"
+        ]
+    },
+    "LinearSolver.Preconditioner.DirectSolverForA": {
+        "defaultValue": [
+            "false"
+        ],
+        "explanation": [
+            "Whether within the Uzawa algorithm a direct solver is used for inverting the 00 matrix block."
+        ],
+        "mode": "manual",
+        "type": [
+            "bool"
+        ]
+    },
+    "LinearSolver.Preconditioner.MassMatrixWeight": {
+        "mode": "ignore"
+    },
+    "LinearSolver.Preconditioner.ILUOrder": {
+        "defaultValue": [
+            "0"
+        ],
+        "explanation": [
+            "The order of the ILU decomposition."
+        ],
+        "mode": "manual",
+        "type": [
+            "int"
+        ]
+    },
+    "LinearSolver.Preconditioner.ILUResort": {
+        "defaultValue": [
+            "false"
+        ],
+        "explanation": [
+            "true if a resort of the computed ILU for improved performance should be done."
+        ],
+        "mode": "manual",
+        "type": [
+            "bool"
+        ]
+    },
+    "LinearSolver.Preconditioner.Iterations": {
+        "defaultValue": [
+            "1"
+        ],
+        "explanation": [
+            "Usually specifies the number of times the preconditioner is applied"
+        ],
+        "mode": "manual",
+        "type": [
+            "int"
+        ]
+    },
+    "LinearSolver.Preconditioner.PowerLawIterations": {
+        "defaultValue": [
+            "5"
+        ],
+        "explanation": [
+            "Number of iterations done to estimate the relaxation factor within the Uzawa algorithm."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::size_t"
+        ]
+    },
+    "LinearSolver.Preconditioner.Relaxation": {
+        "defaultValue": [
+            "1.0"
+        ],
+        "explanation": [
+            "The relaxation parameter for the preconditioner"
+        ],
+        "mode": "manual",
+        "type": [
+            "double"
+        ]
+    },
+    "LinearSolver.Preconditioner.Type": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "The preconditioner type."
+        ],
+        "mode": "manual",
+        "type": [
+            "std::string"
+        ]
+    },
+    "LinearSolver.Preconditioner.Verbosity": {
+        "defaultValue": [
+            "0"
+        ],
+        "explanation": [
+            "The preconditioner verbosity level"
+        ],
+        "mode": "manual",
+        "type": [
+            "int"
+        ]
+    },
+    "LinearSolver.ResidualReduction": {
+        "defaultValue": [
+            "1e-13(linear solver),1e-6(nonlinear)"
+        ],
+        "explanation": [
+            "The residual reduction threshold, i.e. stopping criterion"
+        ],
+        "mode": "manual",
+        "type": [
+            "double"
+        ]
+    },
+    "LinearSolver.Restart": {
+        "defaultValue": [
+            "10"
+        ],
+        "explanation": [
+            "cycles before restarting"
+        ],
+        "mode": "manual",
+        "type": [
+            "int"
+        ]
+    },
+    "LinearSolver.SymmetrizeDirichlet": {
+        "mode": "ignore"
+    },
+    "LinearSolver.Type": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "The type of linear solver, e.g. restartedflexiblegmressolver or uzawa"
+        ],
+        "mode": "manual",
+        "type": [
+            "std::string"
+        ]
+    },
+    "LinearSolver.Verbosity": {
+        "explanation": [
+            "The verbosity level of the linear solver"
+        ]
+    },
+    "LoadSolution.CellCenterPriVarNames": {
+        "explanation": [
+            "Names of cell-centered primary variables of a model with staggered grid discretization"
+        ]
+    },
+    "LoadSolution.FacePriVarNames": {
+        "explanation": [
+            "Names of primary variables on the cell faces of a model with staggered grid discretization"
+        ]
+    },
+    "LoadSolution.PriVarNames": {
+        "explanation": [
+            "Primary variable names"
+        ]
+    },
+    "LoadSolution.PriVarNamesState...": {
+        "defaultValue": [
+            "-"
+        ],
+        "explanation": [
+            "Primary variable names state, e.g. p_liq S_gas"
+        ],
+        "mode": "manual",
+        "type": [
+            "std::vector<std::string>"
+        ]
+    },
+    "MPFA.Q": {
+        "type": [
+            "CoordScalar = GridView::ctype"
+        ],
+        "explanation": [
+            "The quadrature point parameterizaion to be used on scvfs"
+        ]
+    },
+    "MPFA.ZeroEffectiveDiffusionCoefficientThreshold": {
+        "defaultValue": [
+            "1e-16"
+        ],
+        "explanation": [
+            "The threshold for zero effective diffusion coefficient, used for epsilon computation"
+        ],
+        "mode": "manual",
+        "type": [
+            "Scalar"
+        ]
+    },
+    "MatrixConverter.DeletePatternEntriesBelowAbsThreshold": {
+        "explanation": [
+            "Only set non-zero value if original matrix entry is larger than this."
+        ]
+    },
+    "MixedDimension.IntegrationOrder": {
+        "explanation": [
+            "The integration order for coupling source"
+        ]
+    },
+    "MixedDimension.KernelIntegrationCRL": {
+        "explanation": [
+            "The characteristic relative length"
+        ]
+    },
+    "MixedDimension.KernelWidthFactor": {
+        "explanation": [
+            "The kernel width factor"
+        ]
+    },
+    "MixedDimension.NumCircleSegments": {
+        "explanation": [
+            "The number of circle segments in the context of integration points."
+        ]
+    },
+    "MixedDimension.Projection.ConsiderFacesWithinBoundingBoxCoupled": {
+        "explanation": [
+            "determines if all 3D boundary facets within the mesh bounding box should be considered as coupling "
+        ]
+    },
+    "MixedDimension.Projection.CoupledAngleFactor": {
+        "explanation": [
+            "angle threshold in which to search for coupled elements (angle in radians from surface normal vector)"
+        ]
+    },
+    "MixedDimension.Projection.CoupledBoundingBoxShrinkingFactor": {
+        "explanation": [
+            "if ConsiderFacesWithinBoundingBoxCoupled=true shrink the bounding box in all directions by this factor"
+        ]
+    },
+    "MixedDimension.Projection.CoupledRadiusFactor": {
+        "explanation": [
+            "threshold distance in which to search for coupled elements (specified as multiple of radius)"
+        ]
+    },
+    "MixedDimension.Projection.EnableIntersectionOutput": {
+        "explanation": [
+            "set to true to enable debug VTK output for intersections"
+        ]
+    },
+    "MixedDimension.Projection.EstimateNumberOfPointSources": {
+        "explanation": [
+            "provide an estimate for the expected number of coupling points for memory allocation"
+        ]
+    },
+    "MixedDimension.Projection.SimplexIntegrationRefine": {
+        "explanation": [
+            "The number of virtual refinement steps to determine coupled surface area."
+        ]
+    },
+    "MixedDimension.UseCircleAverage": {
+        "explanation": [
+            "if we use the circle average as the 3D values or a point evaluation"
+        ]
+    },
+    "MixedDimension.WriteIntegrationPointsToFile": {
+        "explanation": [
+            "Whether to write integration points to a file"
+        ]
+    },
+    "Newton.AllowedSaturationChange": {
+        "explanation": [
+            "Maximum allowed (relative or absolute) shift of saturation  between to consecutive time steps. If this is not set, any shift is allowed. If SaturationChangeIsRelative is true, relative shifts are considered (while not dividing by zero). If SaturationChangeIsRelative is false, absolute shifts are considered."
+        ]
+    },
+    "Newton.EnableAbsoluteResidualCriterion": {
+        "explanation": [
+            "For Newton iterations to stop the absolute residual is demanded to be below a threshold value. At least two iterations."
+        ]
+    },
+    "Newton.EnableChop": {
+        "explanation": [
+            "chop the Newton update at the beginning of the non-linear solver"
+        ]
+    },
+    "Newton.EnableDynamicOutput": {
+        "explanation": [
+            "Prints current information about assembly and solution process in the coarse of the simulation."
+        ]
+    },
+    "Newton.EnablePartialReassembly": {
+        "explanation": [
+            "Every entity where the primary variables exhibit a relative shift summed up since the last linearization above 'eps' will be reassembled."
+        ]
+    },
+    "Newton.EnableResidualCriterion": {
+        "explanation": [
+            "declare convergence if the initial residual is reduced by the factor ResidualReduction"
+        ]
+    },
+    "Newton.EnableShiftCriterion": {
+        "explanation": [
+            "For Newton iterations to stop the maximum relative shift abs(uLastIter - uNew)/scalarmax(1.0, abs(uLastIter + uNew)*0.5) is demanded to be below a threshold value. At least two iterations."
+        ]
+    },
+    "Newton.LineSearchMinRelaxationFactor": {
+        "explanation": [
+            "A minimum relaxation factor for the line search process."
+        ]
+    },
+    "Newton.MaxAbsoluteResidual": {
+        "explanation": [
+            "The maximum acceptable absolute residual for declaring convergence"
+        ]
+    },
+    "Newton.MaxRelativeShift": {
+        "explanation": [
+            "Set the maximum acceptable difference of any primary variable between two iterations for declaring convergence"
+        ]
+    },
+    "Newton.MaxSteps": {
+        "explanation": [
+            "The number of iterations after we give up"
+        ]
+    },
+    "Newton.MaxTimeStepDivisions": {
+        "explanation": [
+            "The maximum number of time-step divisions"
+        ]
+    },
+    "Newton.MinSteps": {
+        "explanation": [
+            "The minimum number of iterations"
+        ]
+    },
+    "Newton.PlausibilityCheck": {
+        "explanation": [
+            "If this is set true, an error is thrown is a saturation is not between zero and one."
+        ]
+    },
+    "Newton.ReassemblyMaxThreshold": {
+        "defaultValue": [
+            "1e2 * MaxRelativeShift"
+        ],
+        "explanation": [
+            "'maxEps' in reassembly threshold max( minEps, min(maxEps, omega*(currently achieved maximum relative shift)) ). Increasing/decreasing 'maxEps' leads to less/more reassembly if 'omega*shift' is large, i.e., for the first Newton iterations."
+        ]
+    },
+    "Newton.ReassemblyMinThreshold": {
+        "defaultValue": [
+            "1e-1 * MaxRelativeShift"
+        ],
+        "explanation": [
+            "'minEps' in reassembly threshold max( minEps, min(maxEps, omega*(currently achieved maximum relative shift)) ). Increasing/decreasing 'minEps' leads to less/more reassembly if 'omega*shift' is small, i.e., for the last Newton iterations."
+        ]
+    },
+    "Newton.ReassemblyShiftWeight": {
+        "explanation": [
+            "'omega' in reassembly threshold max( minEps, min(maxEps, omega*(currently achieved maximum relative shift)) ). Increasing/decreasing 'maxEps' leads to less/more reassembly if 'omega*shift' is large, i.e., for the first Newton iterations."
+        ]
+    },
+    "Newton.ResidualReduction": {
+        "explanation": [
+            "The maximum acceptable residual norm reduction"
+        ]
+    },
+    "Newton.RetryTimeStepReductionFactor": {
+        "explanation": [
+            "Factor for reducing the current time-step"
+        ]
+    },
+    "Newton.SatisfyResidualAndShiftCriterion": {
+        "explanation": [
+            "declare convergence only if both criteria are met"
+        ]
+    },
+    "Newton.SaturationChangeIsRelative": {
+        "explanation": [
+            "See explanation of AllowedSaturationChange."
+        ]
+    },
+    "Newton.TargetSteps": {
+        "explanation": [
+            "The number of iterations which are considered \"optimal\""
+        ]
+    },
+    "Newton.UseLineSearch": {
+        "explanation": [
+            "Whether to use line search"
+        ]
+    },
+    "Newton.Verbosity": {
+        "explanation": [
+            "The verbosity level of the Newton solver"
+        ]
+    },
+    "PointSource.EnableBoxLumping": {
+        "explanation": [
+            "For a DOF-index to point source map distribute source using a check if point sources are inside a subcontrolvolume instead of using basis function weights."
+        ]
+    },
+    "PrimaryVariableSwitch.Verbosity": {
+        "explanation": [
+            "Verbosity level of the primary variable switch."
+        ]
+    },
+    "Problem.EnableGravity": {
+        "explanation": [
+            "Whether to enable the gravity term"
+        ]
+    },
+    "Problem.EnableInertiaTerms": {
+        "explanation": [
+            "Whether to enable the inertia terms"
+        ]
+    },
+    "Problem.Name": {
+        "explanation": [
+            "Set a name for a problem"
+        ]
+    },
+    "Problem.PoissonRatio": {
+        "mode": "ignore"
+    },
+    "Problem.SandGrainRoughness": {
+        "mode": "ignore"
+    },
+    "Problem.UsePrimaryVariableSwitch": {
+        "mode": "ignore"
+    },
+    "Problem.YoungsModulus": {
+        "mode": "ignore"
+    },
+    "RANS.EddyViscosityModel": {
+        "explanation": [
+            "Choose the eddy viscosity model"
+        ]
+    },
+    "RANS.FlowDirectionAxis": {
+        "explanation": [
+            "The flow direction axis"
+        ]
+    },
+    "RANS.IsFlatWallBounded": {
+        "explanation": [
+            "Set to true, if geometry consists of flat walls"
+        ]
+    },
+    "RANS.SSTModelVersion": {
+        "explanation": [
+            "the model version of the SST model"
+        ]
+    },
+    "RANS.TurbulentPrandtlNumber": {
+        "explanation": [
+            "The turbulent Prandtl number"
+        ]
+    },
+    "RANS.TurbulentSchmidtNumber": {
+        "explanation": [
+            "The turbulent Schmidt number"
+        ]
+    },
+    "RANS.UseStoredEddyViscosity": {
+        "explanation": [
+            "Whether to use the stored eddy viscosity"
+        ]
+    },
+    "RANS.WallNormalAxis": {
+        "explanation": [
+            "The normal wall axis of a flat wall bounded flow"
+        ]
+    },
+    "RANS.WriteFlatWallBoundedFields": {
+        "explanation": [
+            "Whether to write output fields for flat wall geometries"
+        ]
+    },
+    "ShallowWater.EnableViscousFlux": {
+        "explanation": [
+            "Whether to include a viscous flux contribution."
+        ]
+    },
+    "ShallowWater.HorizontalCoefficientOfMixingLengthModel": {
+        "explanation": [
+            "For the turbulence model base on the mixing length: The Smagorinsky-like horizontal turbulence coefficient."
+        ]
+    },
+    "ShallowWater.TurbulentViscosity": {
+        "explanation": [
+            "The (constant) background turbulent viscosity."
+        ],
+        "mode": "manual",
+        "type":  [
+            "Scalar"
+        ],
+        "defaultValue": [
+            "the fluid viscosity "
+        ]
+    },
+    "ShallowWater.UseMixingLengthTurbulenceModel": {
+        "explanation": [
+            "Whether the mixing-length turbulence model is used."
+        ],
+        "mode": "manual",
+        "defaultValue": [
+            "false"
+        ],
+        "type":  [
+            "bool"
+        ]
+    },
+    "ShallowWater.VerticalCoefficientOfMixingLengthModel": {
+        "explanation": [
+            "For the turbulence model base on the mixing length: The Elder-like vertical turbulence coefficient."
+        ]
+    },
+    "SimpleH2O.ReferenceTemperature": {
+        "explanation": [
+            "The reference temperature in \\f$\\mathrm{[K]}\\f$ for calculating the (liquid or gas) enthalpy of simple H2O."
+        ]
+    },
+    "SpatialParams.ComputeAwsFromAnsAndPcMax": {
+        "explanation": [
+            "Compute volume-specific interfacial area between the wetting and solid phase from interfacial area between nonwetting and solid phase and maximum capillary pressure."
+        ]
+    },
+    "SpatialParams.ContactAngle": {
+        "explanation": [
+            "This contact angle \\f$[rad]\\f$ is set both as the contact angle within a pore throat and the one within a pore body. It can be overloaded for solution-dependent values."
+        ]
+    },
+    "SpatialParams.ForchCoeff": {
+        "explanation": [
+            "The Forchheimer coefficient"
+        ]
+    },
+    "SpatialParams.Permeability": {
+        "explanation": [
+            "The permeability"
+        ]
+    },
+    "SpatialParams.Porosity": {
+        "explanation": [
+            "The porosity"
+        ]
+    },
+    "SpatialParams.SurfaceTension": {
+        "explanation": [
+            "The value of the surface tension \\f$[N/m]\\f$. It defaults to the surface tension of water/air."
+        ]
+    },
+    "SpatialParams.Temperature": {
+        "defaultValue": [
+            "293.15"
+        ],
+        "explanation": [
+            "The temperature"
+        ]
+    },
+    "SpatialParams.Tortuosity": {
+        "explanation": [
+            "The tortuosity"
+        ]
+    },
+    "TimeLoop.Restart": {
+        "explanation": [
+            "The restart time stamp for a previously interrupted simulation"
+        ]
+    },
+    "Transmissibility.ConsiderPoreResistance": {
+        "explanation": [
+            "Whether or not the pore resistance should be considered on runtime."
+        ]
+    },
+    "Vtk.AddProcessRank": {
+        "defaultValue": [
+            "true"
+        ],
+        "explanation": [
+            "Whether to add a process rank"
+        ]
+    },
+    "Vtk.AddVelocity": {
+        "explanation": [
+            "Whether to enable velocity output"
+        ],
+        "defaultValue" :["false"]
+    },
+    "Vtk.CoordPrecision": {
+        "explanation": [
+            "The output precision of coordinates."
+        ]
+    },
+    "Vtk.Precision": {
+        "explanation": [
+            "Precision of the vtk output"
+        ]
+    },
+    "Vtk.WriteFaceData": {
+        "explanation": [
+            "For the staggered grid approach, write face-related data into vtp files."
+        ]
+    }
+}

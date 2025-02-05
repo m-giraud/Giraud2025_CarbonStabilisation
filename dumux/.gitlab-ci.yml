@@ -1,0 +1,150 @@
+# SPDX-FileCopyrightInfo: Copyright © DuMux Project contributors, see AUTHORS.md in root folder
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+stages:
+  - check-status
+  - trigger dumux pipelines
+
+variables:
+  IMAGE_REGISTRY_URL: $CI_REGISTRY/dumux-repositories/dumux-docker-ci
+  DUMUX_CI_TRIGGER_LECTURE_BRANCH: releases/3.8
+  DUMUX_CI_DUNE_LATEST_RELEASE: "2.9"
+
+# Cases in which to create pipelines at all. The trigger jobs may further
+# specify how exactly they should be created in different situations.
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_PIPELINE_SOURCE == "pipeline"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: '$CI_COMMIT_BRANCH =~ /^(master|releases\/)/'
+
+# for commits happening on master, we check if there was a successful
+# pipeline on a related merge request already. If yes, we simply return
+# to propagate that pipeline status on master. Otherwise, we trigger a new run.
+check-pipeline-status:
+  image: $IMAGE_REGISTRY_URL/full:dune-$DUMUX_CI_DUNE_LATEST_RELEASE-gcc-ubuntu-22.04
+  stage: check-status
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "pipeline"
+      when: never
+    - if: '$CI_COMMIT_BRANCH =~ /^(master|releases\/)/'
+      when: always
+  script:
+    - |
+      getLastSuccessful() {
+          python3 .gitlab-ci/getpipelineinfo.py \
+                      --access-token $CI_JOB_API_READ_TOKEN \
+                      --look-for latest-merge \
+                      --print-format commit-sha
+      }
+
+      if ! python3 .gitlab-ci/getpipelineinfo.py --access-token $CI_JOB_API_READ_TOKEN \
+                                                 --look-for HEAD \
+                                                 --print-format pipeline-id; then
+          echo "No successful pipeline found."
+
+          REFERENCE_SHA=""
+          if getLastSuccessful; then
+              REFERENCE_SHA=$(getLastSuccessful);
+              echo "Triggering new pipeline against reference commit $REFERENCE_SHA."
+          else
+              echo "Latest successful pipeline not found. Trigger complete pipeline."
+          fi
+
+          curl --request POST --form "token=$CI_JOB_TOKEN" \
+                              --form ref=$CI_COMMIT_BRANCH \
+                              --form "variables[CI_REFERENCE_SHA]=$REFERENCE_SHA" \
+                              "https://git.iws.uni-stuttgart.de/api/v4/projects/31/trigger/pipeline"
+      else
+          echo "Found successful pipeline for the current state of the branch. Not testing again."
+      fi
+
+###################################################################################
+# trigger the Dumux test pipelines                                                #
+# we trigger the test pipeline with different configurations, i.e.                #
+# different Dune versions, compilers, etc. Within merge requests, we create three #
+# test pipelines including two different compilers and a full and minimal setup   #
+# of dependencies. In all other situations, additional test jobs are created.     #
+###################################################################################
+
+# basic trigger job to start the test pipeline
+.base-trigger:
+  stage: trigger dumux pipelines
+  trigger:
+    include: .gitlab-ci/default.yml
+    strategy: depend
+  variables:
+    MR_TARGET_BRANCH_NAME: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+    REFERENCE_SHA: $CI_REFERENCE_SHA
+  rules:
+  - if: $CI_PIPELINE_SOURCE == "schedule"
+    when: always
+  - if: $CI_PIPELINE_SOURCE == "pipeline"
+    when: always
+  - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    when: manual
+
+# trigger for jobs that should not be created in merge requests
+.non-mr-trigger:
+  extends: .base-trigger
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+
+#############################################
+# pipelines to be created in merge requests #
+full-dune-latest-release-gcc:
+  extends: .base-trigger
+  variables:
+    IMAGE: $IMAGE_REGISTRY_URL/full:dune-$DUMUX_CI_DUNE_LATEST_RELEASE-gcc-ubuntu-22.04
+    CXX_MAX_STANDARD: "20"
+    DUMUX_ENABLE_CPPCHECK: "true"
+    DUMUX_ENABLE_DOXYGEN_BUILD: "true"
+    DUMUX_CHECK_EXAMPLE_DOCS: "true"
+
+minimal-dune-latest-release-gcc:
+  extends: .base-trigger
+  variables:
+    IMAGE: $IMAGE_REGISTRY_URL/minimal:dune-$DUMUX_CI_DUNE_LATEST_RELEASE-gcc-ubuntu-22.04
+
+full-dune-latest-release-clang:
+  extends: .base-trigger
+  variables:
+    IMAGE: $IMAGE_REGISTRY_URL/full:dune-$DUMUX_CI_DUNE_LATEST_RELEASE-clang-ubuntu-22.04
+
+################################################
+# trigger test pipelines of downstream modules #
+################################################
+
+# trigger lecture test
+trigger lecture:
+  rules:
+  - if: $CI_PIPELINE_SOURCE == "schedule"
+  - if: $CI_PIPELINE_SOURCE == "pipeline"
+  - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    when: manual
+  stage: trigger dumux pipelines
+  trigger:
+    project: dumux-repositories/dumux-lecture
+    branch: $DUMUX_CI_TRIGGER_LECTURE_BRANCH
+    strategy: depend
+  variables:
+    DUMUX_MERGE_REQUEST_SOURCE_BRANCH: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+    DUMUX_MERGE_REQUEST_SOURCE_PROJECT_URL: $CI_MERGE_REQUEST_SOURCE_PROJECT_URL
+    DUMUX_MERGE_REQUEST_SOURCE_PROJECT_PATH: $CI_MERGE_REQUEST_SOURCE_PROJECT_PATH
+    DUMUX_MERGE_REQUEST_TARGET_BRANCH: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+    DUMUX_COMMIT_SHA: $CI_COMMIT_SHA
+    DUMUX_REFERENCE_SHA: $CI_REFERENCE_SHA
+
+################################################
+# enable secrets security check                #
+################################################
+include:
+  - template: Security/Secret-Detection.gitlab-ci.yml
+
+secret_detection:
+  stage: check-status
+  rules:
+    - when: always

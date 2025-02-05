@@ -1,0 +1,26 @@
+[TimeLoop]
+DtInitial = 1 # [s]
+TEnd = 2 # [s]
+
+[Grid]
+UpperRight = 10 1
+Cells = 100 50
+
+[Problem]
+Name = test_channel_navierstokes
+InletVelocity = 1000
+EnableGravity = false
+
+[Component]
+LiquidDensity = 1.0
+LiquidKinematicViscosity = 1.0
+
+[ Newton ]
+MaxSteps = 10
+MaxRelativeShift = 1e-5
+
+[Vtk]
+WriteFaceData = false
+
+[SpatialParams]
+Temperature = 283.15

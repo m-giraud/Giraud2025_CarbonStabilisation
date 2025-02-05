@@ -1,0 +1,39 @@
+[TimeLoop]
+DtInitial = 1 # [s]
+TEnd = 2 # [s]
+
+[Grid]
+UpperRight = 10 1
+Cells = 100 50
+
+[Problem]
+Name = test_channel_stokes
+InletVelocity = 1
+EnableGravity = false
+EnableInertiaTerms = false
+OutletCondition = Outflow
+
+[Component]
+LiquidDensity = 1.0
+LiquidKinematicViscosity = 1.0
+
+[ Newton ]
+MaxSteps = 10
+MaxRelativeShift = 1e-8
+
+[Vtk]
+WriteFaceData = false
+
+[Assembly]
+NumericDifference.BaseEpsilon =  1e-3
+
+[SpatialParams]
+Temperature = 283.15
+
+# This test does actually not require setting the primary variable magnitues.
+# This rather serves as a demonstration of how to use the feature.
+# [CellCenter.Assembly]
+# NumericDifference.PriVarMagnitude = 1e5 # pressure is in the order of 1e5
+
+[Face.Assembly]
+# NumericDifference.PriVarMagnitude = 1 # velocity is in the order of 1

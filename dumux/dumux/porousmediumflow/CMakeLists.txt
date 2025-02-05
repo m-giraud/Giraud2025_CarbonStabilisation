@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightInfo: Copyright © DuMux Project contributors, see AUTHORS.md in root folder
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+add_subdirectory(1p)
+add_subdirectory(1pnc)
+add_subdirectory(1pncmin)
+add_subdirectory(2p)
+add_subdirectory(2p1c)
+add_subdirectory(2p2c)
+add_subdirectory(2pnc)
+add_subdirectory(2pncmin)
+add_subdirectory(3p)
+add_subdirectory(3p3c)
+add_subdirectory(3pwateroil)
+add_subdirectory(boxdfm)
+add_subdirectory(co2)
+add_subdirectory(compositional)
+add_subdirectory(immiscible)
+add_subdirectory(mineralization)
+add_subdirectory(mpnc)
+add_subdirectory(nonequilibrium)
+add_subdirectory(nonisothermal)
+add_subdirectory(richards)
+add_subdirectory(richardsextended)
+add_subdirectory(richardsnc)
+add_subdirectory(solidenergy)
+add_subdirectory(tracer)
+
+file(GLOB DUMUX_POROUSMEDIUMFLOW_HEADERS *.hh *.inc)
+install(FILES ${DUMUX_POROUSMEDIUMFLOW_HEADERS}
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/dumux/porousmediumflow)

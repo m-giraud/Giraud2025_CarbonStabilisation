@@ -1,0 +1,28 @@
+// SPDX-FileCopyrightInfo: Copyright (C) DUNE Project contributors, see file LICENSE.md in module root
+// SPDX-License-Identifier: LicenseRef-GPL-2.0-only-with-DUNE-exception
+// @GENERATED_SOURCE@
+
+#ifndef DUNE_COMMON_SIMD_TEST_LOOPTEST_HH
+#define DUNE_COMMON_SIMD_TEST_LOOPTEST_HH
+
+#include <complex> // as inserted by substitutions
+
+#include <dune/common/simd/test.hh>
+#include <dune/common/simd/loop.hh>
+
+namespace Dune {
+  namespace Simd {
+
+#cmake @template POINT@
+    extern template void
+    UnitTest::check@POINT@<LoopSIMD<@SCALAR@, 5> >();
+    extern template void
+    UnitTest::check@POINT@<LoopSIMD<@SCALAR@, 5, 64> >();
+    extern template void
+    UnitTest::check@POINT@<LoopSIMD<LoopSIMD<@SCALAR@, 2>, 5> >();
+#cmake @endtemplate@
+
+  } //namespace Simd
+} // namespace Dune
+
+#endif

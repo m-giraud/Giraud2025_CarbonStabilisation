@@ -1,0 +1,29 @@
+DGF
+% SPDX-FileCopyrightInfo: Copyright (C) DUNE Project contributors, see file LICENSE.md in module root
+% SPDX-License-Identifier: LicenseRef-GPL-2.0-only-with-DUNE-exception
+Interval
+ 0  0         % first corner 
+ 1  1         % second corner
+ 4  8         % 4 cells in x and 8 in y direction
+#
+Simplex
+#
+
+GridParameter
+% set overlap to 1
+overlap 1
+% set closure to none for UGGrid 
+closure none
+% generate copies in UGGrid
+copies yes
+#
+
+PERIODICFACETRANSFORMATION
+% set periodic boundaries in x direction
+% 1 0, 0 1 + 1 0
+#
+
+BOUNDARYDOMAIN
+default 1     % default boundary id
+#BOUNDARYDOMAIN
+# examplegrid5.dgf

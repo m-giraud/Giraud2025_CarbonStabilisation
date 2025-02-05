@@ -1,0 +1,29 @@
+[External.Grid]
+Positions0 = 0 1
+Positions1 = 0 1
+Cells0 = 1
+Cells1 = 1
+UpperRight = 1 1
+Cells = 1 1
+Refinement = 4
+
+[Internal.Grid]
+Positions0 = 0 1
+Positions1 = 0 1
+Cells0 = 1
+Cells1 = 1
+UpperRight = 1 1
+Cells = 1 1
+Refinement = 4
+
+[Image.Grid]
+LowerLeft = 1 1
+UpperRight = 5 2
+Cells = 100 25
+Image = grids/dumux_binary.pbm
+
+[RepeatedImage.Grid]
+LowerLeft = 1 1
+PixelDimensions = 1 1
+Repeat = 5 3
+Image = grids/dumux_binary.pbm

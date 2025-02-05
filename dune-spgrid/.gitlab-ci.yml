@@ -1,0 +1,17 @@
+---
+before_script:
+  - duneci-install-module https://gitlab.dune-project.org/core/dune-common.git
+  - duneci-install-module https://gitlab.dune-project.org/core/dune-geometry.git
+  - duneci-install-module https://gitlab.dune-project.org/core/dune-grid.git
+
+debian:11  gcc:c++17:
+  image: registry.dune-project.org/docker/ci/debian:11
+  script: duneci-standard-test
+  variables: 
+    DUNECI_TOOLCHAIN: gcc-10-17
+
+ubuntu:20.04--clang:
+  image: registry.dune-project.org/docker/ci/ubuntu:20.04
+  script: duneci-standard-test
+  variables:
+    DUNECI_TOOLCHAIN: clang-10-17

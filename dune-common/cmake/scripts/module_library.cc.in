@@ -1,0 +1,13 @@
+// SPDX-FileCopyrightInfo: Copyright (C) DUNE Project contributors, see file LICENSE.md in module root
+// SPDX-License-Identifier: LicenseRef-GPL-2.0-only-with-DUNE-exception
+#include <string>
+
+std::size_t ${module_lib_mangled}_version()
+{
+  return ${ProjectVersionMajor} * 10000 + ${ProjectVersionMinor} * 100 + ${ProjectVersionRevision};
+}
+
+std::string ${module_lib_mangled}_version_string()
+{
+  return "${ProjectVersion}";
+}

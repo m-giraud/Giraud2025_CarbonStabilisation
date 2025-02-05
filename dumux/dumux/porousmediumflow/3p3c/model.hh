@@ -1,0 +1,271 @@
+// -*- mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+// vi: set et ts=4 sw=4 sts=4:
+//
+// SPDX-FileCopyrightInfo: Copyright © DuMux Project contributors, see AUTHORS.md in root folder
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+/*!
+ * \file
+ * \ingroup ThreePThreeCModel
+ * \brief Adaption of the fully implicit scheme to the three-phase three-component
+ *        flow model.
+ *
+ * This model implements three-phase three-component flow of three fluid phases
+ * \f$\alpha \in \{ water, gas, NAPL \}\f$ each composed of up to three components
+ * \f$\kappa \in \{ water, air, contaminant \}\f$. The standard multiphase Darcy
+ * approach is used as the equation for the conservation of momentum.
+ * For details on Darcy's law see dumux/flux/darcyslaw.hh.
+ *
+ * By inserting Darcy's law into the equations for the conservation of the
+ * components, one transport equation for each component is obtained as
+ * \f{eqnarray*}
+ && \frac{\partial (\sum_\alpha \phi \varrho_{\alpha,mol} x_\alpha^\kappa
+ S_\alpha )}{\partial t}
+ - \sum\limits_\alpha \nabla \cdot \left\{ \frac{k_{r\alpha}}{\mu_\alpha}
+ \varrho_{\alpha,mol} x_\alpha^\kappa \mathbf{K}
+ (\nabla  p_\alpha - \varrho_{\alpha,mass} \mathbf{g}) \right\}
+ \nonumber \\
+ \nonumber \\
+ && - \sum\limits_\alpha \nabla \cdot \left\{ D_{\alpha, \text{pm}}^\kappa \frac{1}{M_{\kappa}} \varrho_{\alpha}
+ \nabla X^\kappa_{\alpha} \right\}
+ - q^\kappa = 0 \qquad \forall \kappa , \; \forall \alpha,
+ \f}
+ * where:
+ * * \f$ \phi \f$ is the porosity of the porous medium,
+ * * \f$ S_\alpha \f$ represents the saturation of phase \f$ \alpha \f$,
+ * * \f$ \rho_\alpha \f$ is the mass density of phase \f$ \alpha \f$,
+ * * \f$ X_\alpha^\kappa \f$ is the mass fraction of component \f$ \kappa \f$ in phase  \f$ \alpha \f$,
+ * * \f$ x_\alpha^\kappa \f$ is the mole fraction of component \f$ \kappa \f$ in phase    \f$ \alpha \f$,
+ * * \f$ v_\alpha \f$ is the velocity of phase \f$ \alpha \f$,
+ * * \f$ D_{\alpha, \text{pm}}^\kappa \f$ is the effective diffusivity of component \f$ \kappa \f$  in phase \f$ \alpha \f$,
+ * * \f$ M_\kappa \f$ is the molar mass of component \f$ \kappa \f$
+ * * \f$ q_\alpha^\kappa \f$ is a source or sink term.
+ *
+ * Note that these balance equations are molar.
+ *
+ * The model uses commonly applied auxiliary conditions like
+ * \f$S_w + S_n + S_g = 1\f$ for the saturations and
+ * \f$x^w_\alpha + x^a_\alpha + x^c_\alpha = 1\f$ for the mole fractions.
+ * Furthermore, the phase pressures are related to each other via
+ * capillary pressures between the fluid phases, which are functions of
+ * the saturation, e.g. according to the approach of Parker et al.
+ *
+ * The used primary variables are dependent on the locally present fluid phases.
+ * An adaptive primary variable switch is included. The phase state is stored for all nodes
+ * of the system. The following cases can be distinguished:
+ * <ul>
+ *  <li> All three phases are present: Primary variables are two saturations \f$(S_w\f$ and \f$S_n)\f$,
+ *       and a pressure, in this case \f$p_g\f$. </li>
+ *  <li> Only the water phase is present: Primary variables are now the mole fractions of air and
+ *       contaminant in the water phase \f$(x_w^a\f$ and \f$x_w^c)\f$, as well as the gas pressure, which is,
+ *       of course, in a case where only the water phase is present, just the same as the water pressure. </li>
+ *  <li> Gas and NAPL phases are present: Primary variables \f$(S_n\f$, \f$x_g^w\f$, \f$p_g)\f$. </li>
+ *  <li> Water and NAPL phases are present: Primary variables \f$(S_n\f$, \f$x_w^a\f$, \f$p_g)\f$. </li>
+ *  <li> Only gas phase is present: Primary variables \f$(x_g^w\f$, \f$x_g^c\f$, \f$p_g)\f$. </li>
+ *  <li> Water and gas phases are present: Primary variables \f$(S_w\f$, \f$x_w^g\f$, \f$p_g)\f$. </li>
+ * </ul>
+ */
+
+#ifndef DUMUX_3P3C_MODEL_HH
+#define DUMUX_3P3C_MODEL_HH
+
+#include <dune/common/fvector.hh>
+
+#include <dumux/common/properties.hh>
+#include <dumux/porousmediumflow/properties.hh>
+#include <dumux/porousmediumflow/3p/model.hh>
+#include <dumux/porousmediumflow/nonisothermal/model.hh>
+#include <dumux/porousmediumflow/nonisothermal/indices.hh>
+#include <dumux/porousmediumflow/nonisothermal/iofields.hh>
+#include <dumux/porousmediumflow/compositional/switchableprimaryvariables.hh>
+
+#include <dumux/material/fluidstates/compositional.hh>
+#include <dumux/material/fluidmatrixinteractions/diffusivitymillingtonquirk.hh>
+#include <dumux/material/fluidmatrixinteractions/3p/thermalconductivitysomerton3p.hh>
+
+#include "indices.hh"
+#include "volumevariables.hh"
+#include "iofields.hh"
+#include "localresidual.hh"
+
+namespace Dumux {
+
+/*!
+ * \ingroup ThreePThreeCModel
+ * \brief Specifies a number properties of two-phase models.
+ * \param useCS if we are using the constraint solver
+ */
+template<bool useCS, bool useMol>
+struct ThreePThreeCModelTraits
+{
+    using Indices = ThreePThreeCIndices;
+
+    static constexpr int numEq() { return 3; }
+    static constexpr int numFluidPhases() { return 3; }
+    static constexpr int numFluidComponents() { return 3; }
+
+    static constexpr bool enableAdvection() { return true; }
+    static constexpr bool enableMolecularDiffusion() { return true; }
+    static constexpr bool enableEnergyBalance() { return false; }
+
+    static constexpr bool useConstraintSolver() { return useCS; }
+    static constexpr bool useMoles() { return useMol; }
+};
+
+namespace Properties {
+// Create new type tags
+namespace TTag {
+//! The type tags for the isothermal three-phase three-component model
+struct ThreePThreeC { using InheritsFrom = std::tuple<PorousMediumFlow>; };
+//! The type tags for the non-isothermal three-phase three-component model
+struct ThreePThreeCNI { using InheritsFrom = std::tuple<ThreePThreeC>; };
+} // end namespace TTag
+
+//////////////////////////////////////////////////////////////////
+// Property values
+//////////////////////////////////////////////////////////////////
+
+//! Set the model traits
+template<class TypeTag>
+struct BaseModelTraits<TypeTag, TTag::ThreePThreeC>
+{
+private:
+    using FluidSystem = GetPropType<TypeTag, Properties::FluidSystem>;
+    static_assert(FluidSystem::numComponents == 3, "Only fluid systems with 3 components are supported by the 3p3c model!");
+    static_assert(FluidSystem::numPhases == 3, "Only fluid systems with 3 phases are supported by the 3p3c model!");
+public:
+    using type = ThreePThreeCModelTraits<getPropValue<TypeTag, Properties::UseConstraintSolver>(), getPropValue<TypeTag, Properties::UseMoles>()>;
+};
+template<class TypeTag>
+struct ModelTraits<TypeTag, TTag::ThreePThreeC> { using type = GetPropType<TypeTag, Properties::BaseModelTraits>; };
+
+//! Determines whether a constraint solver should be used explicitly
+template<class TypeTag>
+struct UseConstraintSolver<TypeTag, TTag::ThreePThreeC> { static constexpr bool value = false; };
+
+//! Set as default that _no_ component mass balance is replaced by the total mass balance
+template<class TypeTag>
+struct ReplaceCompEqIdx<TypeTag, TTag::ThreePThreeC> { static constexpr int value = GetPropType<TypeTag, Properties::ModelTraits>::numFluidComponents(); };
+/*!
+ * \brief The fluid state which is used by the volume variables to
+ *        store the thermodynamic state. This should be chosen
+ *        appropriately for the model ((non-)isothermal, equilibrium, ...).
+ *        This can be done in the problem.
+ */
+template<class TypeTag>
+struct FluidState<TypeTag, TTag::ThreePThreeC>{
+    private:
+        using Scalar = GetPropType<TypeTag, Properties::Scalar>;
+        using FluidSystem = GetPropType<TypeTag, Properties::FluidSystem>;
+    public:
+        using type = CompositionalFluidState<Scalar, FluidSystem>;
+};
+
+//! The local residual function of the conservation equations
+template<class TypeTag>
+struct LocalResidual<TypeTag, TTag::ThreePThreeC> { using type = ThreePThreeCLocalResidual<TypeTag>; };
+
+//! The primary variables vector for the 3p3c model
+template<class TypeTag>
+struct PrimaryVariables<TypeTag, TTag::ThreePThreeC>
+{
+private:
+    using PrimaryVariablesVector = Dune::FieldVector<GetPropType<TypeTag, Properties::Scalar>,
+                                                     GetPropType<TypeTag, Properties::ModelTraits>::numEq()>;
+public:
+    using type = SwitchablePrimaryVariables<PrimaryVariablesVector, int>;
+};
+
+//! Set the volume variables property
+template<class TypeTag>
+struct VolumeVariables<TypeTag, TTag::ThreePThreeC>
+{
+private:
+    using PV = GetPropType<TypeTag, Properties::PrimaryVariables>;
+    using FSY = GetPropType<TypeTag, Properties::FluidSystem>;
+    using FST = GetPropType<TypeTag, Properties::FluidState>;
+    using SSY = GetPropType<TypeTag, Properties::SolidSystem>;
+    using SST = GetPropType<TypeTag, Properties::SolidState>;
+    using PT = typename GetPropType<TypeTag, Properties::SpatialParams>::PermeabilityType;
+    using MT = GetPropType<TypeTag, Properties::ModelTraits>;
+    using DT = GetPropType<TypeTag, Properties::MolecularDiffusionType>;
+    using EDM = GetPropType<TypeTag, Properties::EffectiveDiffusivityModel>;
+
+    using BaseTraits = ThreePVolumeVariablesTraits<PV, FSY, FST, SSY, SST, PT, MT>;
+    template<class BaseTraits, class DT, class EDM>
+    struct NCTraits : public BaseTraits
+    {
+        using DiffusionType = DT;
+        using EffectiveDiffusivityModel = EDM;
+    };
+
+public:
+    using type = ThreePThreeCVolumeVariables<NCTraits<BaseTraits, DT, EDM>>;
+};
+
+//! The model after Millington (1961) is used for the effective diffusivity
+template<class TypeTag>
+struct EffectiveDiffusivityModel<TypeTag, TTag::ThreePThreeC> { using type = DiffusivityMillingtonQuirk<GetPropType<TypeTag, Properties::Scalar>>; };
+
+//! Set the vtk output fields specific to this model
+template<class TypeTag>
+struct IOFields<TypeTag, TTag::ThreePThreeC> { using type = ThreePThreeCIOFields; };
+
+//! Use mole fractions in the balance equations by default
+template<class TypeTag>
+struct UseMoles<TypeTag, TTag::ThreePThreeC> { static constexpr bool value = true; };
+
+//////////////////////////////////////////////////////////////////
+// Property values for isothermal model required for the general non-isothermal model
+//////////////////////////////////////////////////////////////////
+
+//! Set non-isothermal NumEq
+template<class TypeTag>
+struct ModelTraits<TypeTag, TTag::ThreePThreeCNI>
+{
+private:
+    using IsothermalTraits = GetPropType<TypeTag, Properties::BaseModelTraits>;
+public:
+    using type = PorousMediumFlowNIModelTraits<IsothermalTraits>;
+};
+
+//! Set the volume variables property
+template<class TypeTag>
+struct VolumeVariables<TypeTag, TTag::ThreePThreeCNI>
+{
+private:
+    using PV = GetPropType<TypeTag, Properties::PrimaryVariables>;
+    using FSY = GetPropType<TypeTag, Properties::FluidSystem>;
+    using FST = GetPropType<TypeTag, Properties::FluidState>;
+    using SSY = GetPropType<TypeTag, Properties::SolidSystem>;
+    using SST = GetPropType<TypeTag, Properties::SolidState>;
+    using PT = typename GetPropType<TypeTag, Properties::SpatialParams>::PermeabilityType;
+    using MT = GetPropType<TypeTag, Properties::ModelTraits>;
+    using BaseTraits = ThreePVolumeVariablesTraits<PV, FSY, FST, SSY, SST, PT, MT>;
+
+    using DT = GetPropType<TypeTag, Properties::MolecularDiffusionType>;
+    using EDM = GetPropType<TypeTag, Properties::EffectiveDiffusivityModel>;
+    using ETCM = GetPropType< TypeTag, Properties::ThermalConductivityModel>;
+    template<class BaseTraits, class DT, class EDM, class ETCM>
+    struct NCNITraits : public BaseTraits
+    {
+        using DiffusionType = DT;
+        using EffectiveDiffusivityModel = EDM;
+        using EffectiveThermalConductivityModel = ETCM;
+    };
+public:
+    using type = ThreePThreeCVolumeVariables<NCNITraits<BaseTraits, DT, EDM, ETCM>>;
+};
+
+//! Set the non-isothermal vktoutputfields
+template<class TypeTag>
+struct IOFields<TypeTag, TTag::ThreePThreeCNI> { using type = EnergyIOFields<ThreePThreeCIOFields>; };
+
+//! Somerton is used as default model to compute the effective thermal heat conductivity
+template<class TypeTag>
+struct ThermalConductivityModel<TypeTag, TTag::ThreePThreeCNI> { using type = ThermalConductivitySomerton<GetPropType<TypeTag, Properties::Scalar>>; };
+
+} // end namespace Properties
+} // end namespace Dumux
+
+#endif

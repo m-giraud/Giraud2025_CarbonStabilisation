@@ -1,0 +1,21 @@
+DGF
+% SPDX-FileCopyrightInfo: Copyright (C) DUNE Project contributors, see file LICENSE.md in module root
+% SPDX-License-Identifier: LicenseRef-GPL-2.0-only-with-DUNE-exception
+
+VERTEX
+ 1  -1
+-1  -1
+ 1   1
+-1   1
+#
+
+SIMPLEX
+0  1  2
+2  1  3
+#
+
+GRIDPARAMETER
+NAME BasicUnitCube
+REFINEMENTEDGE ARBITRARY
+DUMPFILENAME basicunitcube-2d.dgf.native
+#
